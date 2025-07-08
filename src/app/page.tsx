@@ -13,14 +13,12 @@ export default function HomePage() {
             A modern design system built with Next.js 14, TypeScript, and Tailwind CSS.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg">
-              <Link href="/v0">View Design System</Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="https://github.com/kunjprkh/ruwa-health" target="_blank">
-                View on GitHub
-              </Link>
-            </Button>
+            <Link href="/v0">
+              <Button size="lg">View Design System</Button>
+            </Link>
+            <Link href="https://github.com/kunjprkh/ruwa-health" target="_blank">
+              <Button variant="outline" size="lg">View on GitHub</Button>
+            </Link>
           </div>
         </div>
       </div>

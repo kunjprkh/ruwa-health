@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force dark mode globally */
+html {
+  color-scheme: dark;
+}
+
 body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
