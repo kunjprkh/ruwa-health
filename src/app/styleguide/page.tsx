@@ -1103,6 +1103,58 @@ export default function StyleguidePage() {
                 </div>
               </ComponentExample>
             </Section>
+
+            {/* Badge Primary & Secondary Variants */}
+            <Section 
+              title="Badge Primary & Secondary Variants" 
+              description="Showcasing all new primary and secondary badge color variants using design tokens and CVA."
+            >
+              <ComponentExample label="Green Primary">
+                <Badge variant="green-primary">Green Primary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Green Secondary">
+                <Badge variant="green-secondary">Green Secondary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Red Primary">
+                <Badge variant="red-primary">Red Primary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Red Secondary">
+                <Badge variant="red-secondary">Red Secondary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Orange Primary">
+                <Badge variant="orange-primary">Orange Primary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Orange Secondary">
+                <Badge variant="orange-secondary">Orange Secondary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Blue Primary">
+                <Badge variant="blue-primary">Blue Primary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Blue Secondary">
+                <Badge variant="blue-secondary">Blue Secondary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Yellow Primary">
+                <Badge variant="yellow-primary">Yellow Primary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Yellow Secondary">
+                <Badge variant="yellow-secondary">Yellow Secondary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Amber Primary">
+                <Badge variant="amber-primary">Amber Primary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Amber Secondary">
+                <Badge variant="amber-secondary">Amber Secondary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Magenta Primary">
+                <Badge variant="magenta-primary">Magenta Primary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Magenta Secondary">
+                <Badge variant="magenta-secondary">Magenta Secondary</Badge>
+              </ComponentExample>
+              <ComponentExample label="Lime Secondary">
+                <Badge variant="lime-secondary">Lime Secondary</Badge>
+              </ComponentExample>
+            </Section>
           </div>
 
           {/* Footer */}

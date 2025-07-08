@@ -169,6 +169,12 @@
   --opacity-yellow-pale: rgba(246, 188, 47, 0.08);
   --opacity-blue-faint: rgba(38, 110, 241, 0.04);
   --opacity-blue-pale: rgba(38, 110, 241, 0.08);
+  --opacity-amber-faint: rgba(223, 149, 0, 0.04);
+  --opacity-amber-pale: rgba(223, 149, 0, 0.08);
+  --opacity-magenta-faint: rgba(248, 119, 210, 0.04);
+  --opacity-magenta-pale: rgba(248, 119, 210, 0.08);
+  --opacity-lime-faint: rgba(119, 183, 28, 0.04);
+  --opacity-lime-pale: rgba(119, 183, 28, 0.08);
 
   /* === TYPOGRAPHY TOKENS === */
   /* Font Sizes (converted from Figma px to rem) */
@@ -281,9 +287,16 @@
   --fg-inverse-quaternary: var(--opacity-inverse-24);
   --fg-inverse-primary-hover: var(--opacity-inverse-64);
   --fg-inverse-tertiary-disabled: var(--opacity-inverse-48);
-  --fg-success: var(--green-50);
+  --fg-success: var(--green-60);
   --fg-warning: var(--yellow-40);
   --fg-error: var(--red-60);
+  --fg-orange: var(--orange-50);
+  --fg-yellow: var(--yellow-30);
+  --fg-magenta: var(--magenta-60);
+  --fg-blue: var(--blue-50);
+  --fg-red: var(--red-60);
+  --fg-green: var(--green-30);
+  --fg-amber: var(--amber-50);
 
   --bg-primary: var(--gray-black);
   --bg-primary-inverse: var(--gray-white);
