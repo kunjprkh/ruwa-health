@@ -14,10 +14,68 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { ChevronRight, Loader2, Mail, Search, AlertCircle } from "lucide-react";
+import BiomarkerTableRow, { type BiomarkerData } from "@/components/ui/biomarker-table-row";
 
 export default function DesignSystemPage() {
   const [radioValue, setRadioValue] = useState("option1");
   const [selectValue, setSelectValue] = useState("");
+  const [editingBiomarker, setEditingBiomarker] = useState<string | null>(null);
+  const [biomarkers, setBiomarkers] = useState<BiomarkerData[]>([
+    {
+      id: "1",
+      name: "Glucose",
+      value: 1200,
+      unit: "mg/dL",
+      referenceRange: "70-100",
+      status: "Out Of Range",
+      confidenceScore: 95
+    },
+    {
+      id: "2", 
+      name: "Insulin",
+      value: 25,
+      unit: "μIU/mL",
+      referenceRange: "2.6-24.9",
+      status: "Peak",
+      confidenceScore: 88
+    },
+    {
+      id: "3",
+      name: "HbA1c",
+      value: 5.7,
+      unit: "%",
+      referenceRange: "<5.7",
+      status: "Normal",
+      confidenceScore: 65
+    },
+    {
+      id: "4",
+      name: "Cholesterol",
+      value: 180,
+      unit: "mg/dL", 
+      referenceRange: "<200",
+      status: "Normal",
+      confidenceScore: 92
+    }
+  ]);
+
+  const handleBiomarkerEdit = (id: string) => {
+    setEditingBiomarker(id);
+  };
+
+  const handleBiomarkerSave = async (id: string, newValue: number): Promise<void> => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    setBiomarkers(prev => prev.map(b => 
+      b.id === id ? { ...b, value: newValue } : b
+    ));
+    setEditingBiomarker(null);
+  };
+
+  const handleBiomarkerCancel = (_id: string) => {
+    setEditingBiomarker(null);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -30,11 +88,12 @@ export default function DesignSystemPage() {
         </div>
 
         <Tabs defaultValue="buttons" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="buttons">Buttons</TabsTrigger>
             <TabsTrigger value="inputs">Inputs</TabsTrigger>
             <TabsTrigger value="controls">Controls</TabsTrigger>
             <TabsTrigger value="basic">Basic</TabsTrigger>
+            <TabsTrigger value="biomarker">Biomarker</TabsTrigger>
           </TabsList>
 
           <TabsContent value="buttons" className="mt-6">
@@ -355,6 +414,154 @@ export default function DesignSystemPage() {
                       Your session has expired. Please log in again.
                     </AlertDescription>
                   </Alert>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="biomarker" className="mt-6">
+            <div className="space-y-8">
+              {/* Biomarker Table Header */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Biomarker Table Row</h3>
+                <p className="text-sm text-muted-foreground mb-6">
+                  Interactive biomarker data rows with inline editing, confidence indicators, and status badges.
+                  Click on any value to edit, use Enter to save or Escape to cancel.
+                </p>
+              </div>
+
+              {/* Biomarker Table */}
+              <div className="border rounded-lg overflow-hidden">
+                {/* Table Header */}
+                <div className="bg-muted/50 border-b px-4 py-3">
+                  <div className="flex items-center h-6 text-sm font-medium text-muted-foreground">
+                    <div className="flex-shrink-0 w-6 mr-3"></div> {/* Confidence indicator space */}
+                    <div className="flex-shrink-0 w-32">Biomarker</div>
+                    <div className="flex-shrink-0 w-24 mx-3 text-right">Value</div>
+                    <div className="flex-shrink-0 w-16">Unit</div>
+                    <div className="flex-1 mx-3">Reference Range</div>
+                    <div className="flex-shrink-0">Status</div>
+                  </div>
+                </div>
+
+                {/* Biomarker Rows */}
+                <div className="bg-background">
+                  {biomarkers.map((biomarker) => (
+                    <BiomarkerTableRow
+                      key={biomarker.id}
+                      biomarker={biomarker}
+                      isEditing={editingBiomarker === biomarker.id}
+                      onEdit={handleBiomarkerEdit}
+                      onSave={handleBiomarkerSave}
+                      onCancel={handleBiomarkerCancel}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Feature Documentation */}
+              <div className="grid gap-6 md:grid-cols-2">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Interaction Features</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3 text-sm">
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <strong>Inline Editing:</strong> Click any value to edit in place
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <strong>Keyboard Shortcuts:</strong> Enter to save, Escape to cancel
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <strong>Number Formatting:</strong> Automatic comma separators (1,000)
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <strong>Validation:</strong> Real-time numeric input validation
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Visual Indicators</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3 text-sm">
+                    <div className="flex items-start gap-2">
+                      <div className="w-1 h-6 bg-green-600 rounded-sm flex-shrink-0"></div>
+                      <div>
+                        <strong>High Confidence (≥90%):</strong> Green thick line
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-1 h-6 bg-yellow-500 rounded-sm flex-shrink-0" style={{width: '3px'}}></div>
+                      <div>
+                        <strong>Medium Confidence (70-89%):</strong> Yellow medium line
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-1 h-6 bg-red-500 rounded-sm flex-shrink-0" style={{width: '2px'}}></div>
+                      <div>
+                        <strong>Low Confidence (&lt;70%):</strong> Red thin line
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Badge variant="secondary" className="text-xs">Status</Badge>
+                      <div>
+                        <strong>Status Badges:</strong> Peak, Normal, Out of Range
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Input States Demo */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Input States</h3>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  <div className="space-y-2">
+                    <Label>Default State</Label>
+                    <Input 
+                      value="1,000" 
+                      readOnly 
+                      className="border border-border text-right"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Hover State</Label>
+                    <Input 
+                      value="1,000" 
+                      readOnly 
+                      className="border-2 border-border text-right"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Focused State</Label>
+                    <Input 
+                      value="1,000" 
+                      readOnly 
+                      className="border-2 border-primary ring-1 ring-ring text-right"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Error State</Label>
+                    <Input 
+                      value="invalid" 
+                      readOnly 
+                      className="border-2 border-destructive ring-1 ring-destructive/20 text-right"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
