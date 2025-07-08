@@ -61,6 +61,10 @@ export default function HomePage() {
                 <Link href="/styleguide">View Style Guide</Link>
               </Button>
               
+              <Button variant="secondary" size="lg" className="px-8 py-6 text-lg" asChild>
+                <Link href="/shadcn">shadcn/ui Components</Link>
+              </Button>
+              
               <Button variant="outline" size="lg" className="px-8 py-6 text-lg" asChild>
                 <Link href="https://github.com/kunjprkh/ruwa-health" target="_blank" rel="noopener noreferrer">
                   View on GitHub
