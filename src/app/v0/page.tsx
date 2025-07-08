@@ -16,14 +16,8 @@ import { Label } from "@/components/ui/label";
 import { ChevronRight, Loader2, Mail, Search, AlertCircle } from "lucide-react";
 
 export default function DesignSystemPage() {
-  const [loading, setLoading] = useState(false);
   const [radioValue, setRadioValue] = useState("option1");
   const [selectValue, setSelectValue] = useState("");
-
-  const handleLoadingDemo = () => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -46,8 +40,8 @@ export default function DesignSystemPage() {
           <TabsContent value="buttons" className="mt-6">
             <div className="space-y-8">
               {/* Button Variants */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Button Variants</h3>
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Button Variants</h3>
                 <div className="flex flex-wrap gap-4">
                   <Button>Button</Button>
                   <Button variant="secondary">Secondary</Button>
@@ -59,9 +53,9 @@ export default function DesignSystemPage() {
               </div>
 
               {/* Button Sizes */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Button Sizes</h3>
-                <div className="flex flex-wrap items-center gap-4">
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Button Sizes</h3>
+                <div className="flex items-center gap-4">
                   <Button size="sm">Small</Button>
                   <Button>Default</Button>
                   <Button size="lg">Large</Button>
@@ -71,10 +65,10 @@ export default function DesignSystemPage() {
                 </div>
               </div>
 
-              {/* Button with Icon */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Button with Icon</h3>
-                <div className="flex flex-wrap gap-4">
+              {/* Button with Icons */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">With Icons</h3>
+                <div className="flex gap-4">
                   <Button>
                     <Mail className="mr-2 h-4 w-4" />
                     Login with Email
@@ -87,27 +81,15 @@ export default function DesignSystemPage() {
               </div>
 
               {/* Loading and Disabled States */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Loading and Disabled States</h3>
-                <div className="flex flex-wrap gap-4">
-                  <Button onClick={handleLoadingDemo} disabled={loading}>
-                    {loading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Please wait
-                      </>
-                    ) : (
-                      "Click me"
-                    )}
-                  </Button>
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Loading and Disabled States</h3>
+                <div className="flex gap-4">
                   <Button disabled>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Please wait
                   </Button>
                   <Button disabled>Disabled</Button>
-                  <Button variant="outline" disabled>
-                    Disabled
-                  </Button>
+                  <Button variant="outline" disabled>Disabled Outline</Button>
                 </div>
               </div>
             </div>
