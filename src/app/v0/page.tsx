@@ -9,28 +9,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
-import { Mail, Search, AlertCircle, CheckCircle, Download, Plus, Settings } from "lucide-react";
+import { ChevronRight, Loader2, Mail, Search, AlertCircle } from "lucide-react";
 
 export default function DesignSystemPage() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [inputError, setInputError] = useState(false);
-  const [selectValue, setSelectValue] = useState("");
-  const [checkboxValue, setCheckboxValue] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [radioValue, setRadioValue] = useState("option1");
-  const [switchValue, setSwitchValue] = useState(false);
+  const [selectValue, setSelectValue] = useState("");
 
   const handleLoadingDemo = () => {
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000);
-  };
-
-  const toggleInputError = () => {
-    setInputError(!inputError);
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
   };
 
   return (
@@ -39,7 +31,7 @@ export default function DesignSystemPage() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight">Design System</h1>
           <p className="text-muted-foreground mt-2">
-            Interactive showcase of UI components with TweakCN theme and comprehensive interaction states
+            shadcn/ui components with official documentation examples
           </p>
         </div>
 
@@ -53,82 +45,69 @@ export default function DesignSystemPage() {
 
           <TabsContent value="buttons" className="mt-6">
             <div className="space-y-8">
+              {/* Button Variants */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">Button Variants</h3>
-                <p className="text-sm text-muted-foreground mb-6">All button variants with proper TweakCN theme colors</p>
                 <div className="flex flex-wrap gap-4">
-                  <Button>Default</Button>
+                  <Button>Button</Button>
+                  <Button variant="secondary">Secondary</Button>
                   <Button variant="destructive">Destructive</Button>
                   <Button variant="outline">Outline</Button>
-                  <Button variant="secondary">Secondary</Button>
                   <Button variant="ghost">Ghost</Button>
                   <Button variant="link">Link</Button>
                 </div>
               </div>
 
+              {/* Button Sizes */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">Button Sizes</h3>
-                <p className="text-sm text-muted-foreground mb-6">Different sizes for various use cases</p>
                 <div className="flex flex-wrap items-center gap-4">
                   <Button size="sm">Small</Button>
-                  <Button size="default">Default</Button>
+                  <Button>Default</Button>
                   <Button size="lg">Large</Button>
-                  <Button size="icon">
-                    <Mail className="h-4 w-4" />
+                  <Button variant="outline" size="icon">
+                    <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
 
+              {/* Button with Icon */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Button States</h3>
-                <p className="text-sm text-muted-foreground mb-6">Interactive states including loading and disabled</p>
-                <div className="flex flex-wrap gap-4">
-                  <Button onClick={handleLoadingDemo} loading={isLoading}>
-                    {isLoading ? "Loading..." : "Click for Loading"}
-                  </Button>
-                  <Button disabled>Disabled</Button>
-                  <Button variant="outline" disabled>
-                    Disabled Outline
-                  </Button>
-                  <Button variant="destructive" disabled>
-                    Disabled Destructive
-                  </Button>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Buttons with Icons</h3>
-                <p className="text-sm text-muted-foreground mb-6">Combining icons with text for better UX</p>
+                <h3 className="text-lg font-semibold mb-4">Button with Icon</h3>
                 <div className="flex flex-wrap gap-4">
                   <Button>
                     <Mail className="mr-2 h-4 w-4" />
-                    Send Email
+                    Login with Email
                   </Button>
                   <Button variant="outline">
                     <Search className="mr-2 h-4 w-4" />
                     Search
                   </Button>
-                  <Button variant="secondary">
-                    <Download className="mr-2 h-4 w-4" />
-                    Download
-                  </Button>
-                  <Button variant="ghost">
-                    <Settings className="mr-2 h-4 w-4" />
-                    Settings
-                  </Button>
-                  <Button size="icon" variant="outline">
-                    <Plus className="h-4 w-4" />
-                  </Button>
                 </div>
               </div>
 
+              {/* Loading and Disabled States */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Hover & Focus States</h3>
-                <p className="text-sm text-muted-foreground mb-6">Try hovering and focusing these buttons to see the interactions</p>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl">
-                  <Button className="focus-visible:ring-2">Focus Me</Button>
-                  <Button variant="outline" className="hover:scale-105 transition-transform">Hover Effect</Button>
-                  <Button variant="secondary">Hover & Focus</Button>
+                <h3 className="text-lg font-semibold mb-4">Loading and Disabled States</h3>
+                <div className="flex flex-wrap gap-4">
+                  <Button onClick={handleLoadingDemo} disabled={loading}>
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Please wait
+                      </>
+                    ) : (
+                      "Click me"
+                    )}
+                  </Button>
+                  <Button disabled>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Please wait
+                  </Button>
+                  <Button disabled>Disabled</Button>
+                  <Button variant="outline" disabled>
+                    Disabled
+                  </Button>
                 </div>
               </div>
             </div>
@@ -136,125 +115,66 @@ export default function DesignSystemPage() {
 
           <TabsContent value="inputs" className="mt-6">
             <div className="space-y-8">
+              {/* Basic Input */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Input Fields</h3>
-                <p className="text-sm text-muted-foreground mb-6">Text inputs with proper border colors and focus states</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-                  <div className="space-y-2">
-                    <Label htmlFor="input-default">Default Input</Label>
-                    <Input 
-                      id="input-default"
-                      placeholder="Enter text..." 
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="input-error">Error State</Label>
-                    <Input 
-                      id="input-error"
-                      placeholder="This has an error" 
-                      error={inputError}
-                    />
-                    <Button size="sm" variant="outline" onClick={toggleInputError}>
-                      Toggle Error
-                    </Button>
-                  </div>
+                <h3 className="text-lg font-semibold mb-4">Input</h3>
+                <div className="grid w-full max-w-sm items-center gap-1.5">
+                  <Input type="email" placeholder="Email" />
+                </div>
+              </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="input-disabled">Disabled</Label>
-                    <Input 
-                      id="input-disabled"
-                      placeholder="Disabled input" 
-                      disabled 
-                    />
-                  </div>
+              {/* Input with Label */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Input with Label</h3>
+                <div className="grid w-full max-w-sm items-center gap-1.5">
+                  <Label htmlFor="email">Email</Label>
+                  <Input type="email" id="email" placeholder="Email" />
+                </div>
+              </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="input-email">Email</Label>
-                    <Input 
-                      id="input-email"
-                      type="email" 
-                      placeholder="Enter email..." 
-                    />
+              {/* Input Variations */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Input Variations</h3>
+                <div className="grid w-full max-w-sm gap-4">
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="password">Password</Label>
+                    <Input type="password" id="password" placeholder="Password" />
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="input-password">Password</Label>
-                    <Input 
-                      id="input-password"
-                      type="password" 
-                      placeholder="Enter password..." 
-                    />
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="disabled">Disabled</Label>
+                    <Input disabled type="email" id="disabled" placeholder="Email" />
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="input-search">Search</Label>
-                    <Input 
-                      id="input-search"
-                      type="search" 
-                      placeholder="Search..." 
-                    />
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="file">File</Label>
+                    <Input id="file" type="file" />
                   </div>
                 </div>
               </div>
 
+              {/* Textarea */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">Textarea</h3>
-                <p className="text-sm text-muted-foreground mb-6">Multi-line text input with resize disabled</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-                  <div className="space-y-2">
-                    <Label htmlFor="textarea-default">Default Textarea</Label>
-                    <Textarea 
-                      id="textarea-default"
-                      placeholder="Enter your message..." 
-                      className="min-h-[100px]"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="textarea-error">Error State</Label>
-                    <Textarea 
-                      id="textarea-error"
-                      placeholder="This has an error..." 
-                      error={inputError}
-                      className="min-h-[100px]"
-                    />
-                  </div>
+                <div className="grid w-full gap-1.5">
+                  <Label htmlFor="message">Your message</Label>
+                  <Textarea placeholder="Type your message here." id="message" />
                 </div>
               </div>
 
+              {/* Textarea Disabled */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Select Dropdown</h3>
-                <p className="text-sm text-muted-foreground mb-6">Dropdown selection with proper styling</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
-                  <div className="space-y-2">
-                    <Label htmlFor="select-default">Choose Option</Label>
-                    <Select value={selectValue} onValueChange={setSelectValue}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="option1">Option 1</SelectItem>
-                        <SelectItem value="option2">Option 2</SelectItem>
-                        <SelectItem value="option3">Option 3</SelectItem>
-                        <SelectItem value="option4">Option 4</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="select-disabled">Disabled Select</Label>
-                    <Select disabled>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Disabled select" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="option1">Option 1</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                <h3 className="text-lg font-semibold mb-4">Textarea Disabled</h3>
+                <div className="grid w-full gap-1.5">
+                  <Label htmlFor="message-2">Your message</Label>
+                  <Textarea placeholder="Type your message here." id="message-2" disabled />
+                </div>
+              </div>
+
+              {/* Input with Button */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Input with Button</h3>
+                <div className="flex w-full max-w-sm items-center space-x-2">
+                  <Input type="email" placeholder="Email" />
+                  <Button type="submit">Subscribe</Button>
                 </div>
               </div>
             </div>
@@ -262,88 +182,102 @@ export default function DesignSystemPage() {
 
           <TabsContent value="controls" className="mt-6">
             <div className="space-y-8">
+              {/* Checkbox */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">Checkbox</h3>
-                <p className="text-sm text-muted-foreground mb-6">Checkbox controls with different states</p>
-                <div className="space-y-4 max-w-md">
+                <div className="space-y-4">
                   <div className="flex items-center space-x-2">
-                    <Checkbox 
-                      id="checkbox1" 
-                      checked={checkboxValue}
-                      onCheckedChange={(checked) => setCheckboxValue(checked === true)}
-                    />
-                    <Label htmlFor="checkbox1">Accept terms and conditions</Label>
+                    <Checkbox id="terms" />
+                    <Label htmlFor="terms">Accept terms and conditions</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="checkbox2" />
-                    <Label htmlFor="checkbox2">Subscribe to newsletter</Label>
+                    <Checkbox id="terms2" />
+                    <Label htmlFor="terms2" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                      You agree to our Terms of Service and Privacy Policy.
+                    </Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="checkbox3" defaultChecked />
-                    <Label htmlFor="checkbox3">Remember me</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="checkbox4" disabled />
-                    <Label htmlFor="checkbox4">Disabled checkbox</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="checkbox5" disabled checked />
-                    <Label htmlFor="checkbox5">Disabled checked</Label>
+                    <Checkbox id="disabled" disabled />
+                    <Label htmlFor="disabled">Disabled checkbox</Label>
                   </div>
                 </div>
               </div>
 
+              {/* Radio Group */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">Radio Group</h3>
-                <p className="text-sm text-muted-foreground mb-6">Single selection from multiple options</p>
-                <RadioGroup value={radioValue} onValueChange={setRadioValue} className="max-w-md">
+                <RadioGroup value={radioValue} onValueChange={setRadioValue}>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option1" id="radio1" />
-                    <Label htmlFor="radio1">Option 1</Label>
+                    <RadioGroupItem value="option1" id="option1" />
+                    <Label htmlFor="option1">Option One</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option2" id="radio2" />
-                    <Label htmlFor="radio2">Option 2</Label>
+                    <RadioGroupItem value="option2" id="option2" />
+                    <Label htmlFor="option2">Option Two</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option3" id="radio3" />
-                    <Label htmlFor="radio3">Option 3</Label>
+                    <RadioGroupItem value="option3" id="option3" />
+                    <Label htmlFor="option3">Option Three</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option4" id="radio4" disabled />
-                    <Label htmlFor="radio4">Disabled option</Label>
+                    <RadioGroupItem value="option4" id="option4" disabled />
+                    <Label htmlFor="option4">Option Four (Disabled)</Label>
                   </div>
                 </RadioGroup>
               </div>
 
+              {/* Switch */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">Switch</h3>
-                <p className="text-sm text-muted-foreground mb-6">Toggle switches for boolean settings</p>
-                <div className="space-y-4 max-w-md">
+                <div className="space-y-4">
                   <div className="flex items-center space-x-2">
-                    <Switch 
-                      id="switch1" 
-                      checked={switchValue}
-                      onCheckedChange={setSwitchValue}
-                    />
-                    <Label htmlFor="switch1">Enable notifications</Label>
+                    <Switch id="airplane-mode" />
+                    <Label htmlFor="airplane-mode">Airplane Mode</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Switch id="switch2" />
-                    <Label htmlFor="switch2">Dark mode</Label>
+                    <Switch id="airplane-mode-2" />
+                    <Label htmlFor="airplane-mode-2">Airplane Mode</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Switch id="switch3" defaultChecked />
-                    <Label htmlFor="switch3">Auto-save</Label>
+                    <Switch id="disabled-switch" disabled />
+                    <Label htmlFor="disabled-switch">Disabled</Label>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Switch id="switch4" disabled />
-                    <Label htmlFor="switch4">Disabled switch</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Switch id="switch5" disabled checked />
-                    <Label htmlFor="switch5">Disabled checked</Label>
-                  </div>
+                </div>
+              </div>
+
+              {/* Select */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Select</h3>
+                <div className="w-[180px]">
+                  <Select value={selectValue} onValueChange={setSelectValue}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a fruit" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="apple">Apple</SelectItem>
+                      <SelectItem value="banana">Banana</SelectItem>
+                      <SelectItem value="blueberry">Blueberry</SelectItem>
+                      <SelectItem value="grapes">Grapes</SelectItem>
+                      <SelectItem value="pineapple">Pineapple</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              {/* Select Disabled */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Select Disabled</h3>
+                <div className="w-[180px]">
+                  <Select disabled>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a fruit" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="apple">Apple</SelectItem>
+                      <SelectItem value="banana">Banana</SelectItem>
+                      <SelectItem value="blueberry">Blueberry</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
             </div>
@@ -351,109 +285,92 @@ export default function DesignSystemPage() {
 
           <TabsContent value="basic" className="mt-6">
             <div className="space-y-8">
+              {/* Card */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Cards</h3>
-                <p className="text-sm text-muted-foreground mb-6">Card components with hover effects and proper theme colors</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <Card>
+                <h3 className="text-lg font-semibold mb-4">Card</h3>
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <Card className="w-[350px]">
                     <CardHeader>
-                      <CardTitle>Basic Card</CardTitle>
-                      <CardDescription>
-                        A simple card with header and content sections.
-                      </CardDescription>
+                      <CardTitle>Create project</CardTitle>
+                      <CardDescription>Deploy your new project in one-click.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        Card content goes here. This demonstrates the basic card layout with proper spacing.
-                      </p>
+                      <form>
+                        <div className="grid w-full items-center gap-4">
+                          <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="name">Name</Label>
+                            <Input id="name" placeholder="Name of your project" />
+                          </div>
+                          <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="framework">Framework</Label>
+                            <Select>
+                              <SelectTrigger id="framework">
+                                <SelectValue placeholder="Select" />
+                              </SelectTrigger>
+                              <SelectContent position="popper">
+                                <SelectItem value="next">Next.js</SelectItem>
+                                <SelectItem value="sveltekit">SvelteKit</SelectItem>
+                                <SelectItem value="astro">Astro</SelectItem>
+                                <SelectItem value="nuxt">Nuxt.js</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                      </form>
                     </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Interactive Card</CardTitle>
-                      <CardDescription>
-                        Card with interactive elements and controls.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="flex items-center space-x-2">
-                        <Checkbox id="card-checkbox" />
-                        <Label htmlFor="card-checkbox">Enable feature</Label>
-                      </div>
-                      <Button className="w-full" size="sm">
-                        Take Action
-                      </Button>
-                    </CardContent>
+                    <CardFooter className="flex justify-between">
+                      <Button variant="outline">Cancel</Button>
+                      <Button>Deploy</Button>
+                    </CardFooter>
                   </Card>
 
-                  <Card>
+                  <Card className="w-[350px]">
                     <CardHeader>
-                      <CardTitle>Status Card</CardTitle>
-                      <CardDescription>
-                        Card showing different status indicators.
-                      </CardDescription>
+                      <CardTitle>Notifications</CardTitle>
+                      <CardDescription>You have 3 unread messages.</CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">Status</span>
-                        <Badge variant="success">Active</Badge>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">Priority</span>
-                        <Badge variant="warning">High</Badge>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">Type</span>
-                        <Badge variant="outline">System</Badge>
+                    <CardContent className="grid gap-4">
+                      <div className="flex items-center space-x-4 rounded-md border p-4">
+                        <div className="flex-1 space-y-1">
+                          <p className="text-sm font-medium leading-none">
+                            Push Notifications
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            Send notifications to device.
+                          </p>
+                        </div>
+                        <Switch />
                       </div>
                     </CardContent>
                   </Card>
                 </div>
               </div>
 
+              {/* Badge */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Badges</h3>
-                <p className="text-sm text-muted-foreground mb-6">Status indicators and labels with hover effects</p>
+                <h3 className="text-lg font-semibold mb-4">Badge</h3>
                 <div className="flex flex-wrap gap-4">
-                  <Badge>Default</Badge>
+                  <Badge>Badge</Badge>
                   <Badge variant="secondary">Secondary</Badge>
                   <Badge variant="destructive">Destructive</Badge>
                   <Badge variant="outline">Outline</Badge>
-                  <Badge variant="success">Success</Badge>
-                  <Badge variant="warning">Warning</Badge>
                 </div>
               </div>
 
+              {/* Alert */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Alerts</h3>
-                <p className="text-sm text-muted-foreground mb-6">Important messages and notifications</p>
-                <div className="space-y-4 max-w-2xl">
+                <h3 className="text-lg font-semibold mb-4">Alert</h3>
+                <div className="space-y-4 max-w-md">
                   <Alert>
                     <AlertCircle className="h-4 w-4" />
                     <AlertDescription>
-                      This is a default alert with an information icon.
+                      Your session will expire in 5 minutes.
                     </AlertDescription>
                   </Alert>
-                  
                   <Alert variant="destructive">
                     <AlertCircle className="h-4 w-4" />
                     <AlertDescription>
-                      This is a destructive alert indicating an error or warning.
-                    </AlertDescription>
-                  </Alert>
-
-                  <Alert className="border-green-200 bg-green-50 text-green-800">
-                    <CheckCircle className="h-4 w-4" />
-                    <AlertDescription>
-                      This is a success alert indicating successful completion.
-                    </AlertDescription>
-                  </Alert>
-
-                  <Alert className="border-yellow-200 bg-yellow-50 text-yellow-800">
-                    <AlertCircle className="h-4 w-4" />
-                    <AlertDescription>
-                      This is a warning alert for important notifications.
+                      Your session has expired. Please log in again.
                     </AlertDescription>
                   </Alert>
                 </div>
