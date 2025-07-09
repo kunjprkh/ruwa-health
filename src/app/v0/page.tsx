@@ -389,6 +389,25 @@ export default function DesignSystemPage() {
                   <Badge variant="destructive">Destructive</Badge>
                   <Badge variant="outline">Outline</Badge>
                 </div>
+                {/* New color variants - two-row layout */}
+                <div className="flex flex-wrap gap-6 mb-6">
+                  <Badge variant="green">Green</Badge>
+                  <Badge variant="red">Red</Badge>
+                  <Badge variant="orange">Orange</Badge>
+                  <Badge variant="blue">Blue</Badge>
+                  <Badge variant="amber">Amber</Badge>
+                  <Badge variant="magenta">Magenta</Badge>
+                  <Badge variant="yellow">Yellow</Badge>
+                </div>
+                <div className="flex flex-wrap gap-6">
+                  <Badge variant="green-secondary">Green Secondary</Badge>
+                  <Badge variant="red-secondary">Red Secondary</Badge>
+                  <Badge variant="orange-secondary">Orange Secondary</Badge>
+                  <Badge variant="blue-secondary">Blue Secondary</Badge>
+                  <Badge variant="amber-secondary">Amber Secondary</Badge>
+                  <Badge variant="magenta-secondary">Magenta Secondary</Badge>
+                  <Badge variant="yellow-secondary">Yellow Secondary</Badge>
+                </div>
               </div>
 
               {/* Alert */}
