@@ -49,14 +49,6 @@ interface FigmaNode {
   componentProperties?: Record<string, any>;
 }
 
-interface FigmaComponent {
-  key: string;
-  name: string;
-  description?: string;
-  componentSetId?: string;
-  documentationLinks?: string[];
-}
-
 async function fetchFigmaFile(fileKey: string, accessToken: string) {
   const response = await fetch(`https://api.figma.com/v1/files/${fileKey}`, {
     headers: {
