@@ -42,9 +42,7 @@ const BiomarkerTable: React.FC<BiomarkerTableProps> = ({
     )}>
       {/* Table Header */}
       <div className={cn(
-        "flex items-center h-12 px-4 mb-2",
-        "bg-muted",
-        "rounded-md",
+        "flex items-center h-12 mb-2",
         "text-muted-foreground",
         "text-sm font-medium"
       )}>

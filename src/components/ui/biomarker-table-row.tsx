@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { BiomarkerInput } from '@/components/ui/biomarker-input';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { Check, X, AlertTriangle } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface BiomarkerData {
   id: string;
@@ -12,7 +12,7 @@ interface BiomarkerData {
   value: number;
   unit: string;
   referenceRange: string;
-  status: 'Peak' | 'Out Of Range' | 'Normal';
+  status: 'Peak' | 'Critical' | 'Out Of Range' | 'Normal';
   confidenceScore: number; // 0-100
 }
 
@@ -35,8 +35,8 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
 }) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
 
   // Format number with commas
   const formatNumber = (num: number): string => {
@@ -80,13 +80,15 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
   const getStatusVariant = (status: string) => {
     switch (status) {
       case 'Peak':
-        return 'default';
+        return 'green';
+      case 'Critical':
+        return 'red';
       case 'Out Of Range':
-        return 'destructive';
+        return 'orange';
       case 'Normal':
-        return 'secondary';
+        return 'blue';
       default:
-        return 'secondary';
+        return 'blue';
     }
   };
 
@@ -95,7 +97,6 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
   useEffect(() => {
     if (isEditing) {
       setInputValue(formatNumber(biomarker.value));
-      setError(null);
       // Focus input after render
       setTimeout(() => inputRef.current?.focus(), 0);
     }
@@ -107,9 +108,12 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
     
     if (value === '' || validateInput(value)) {
       setInputValue(value);
-      setError(null);
     } else {
-      setError('Please enter a valid number');
+      toast({
+        variant: "destructive",
+        title: "Invalid Input",
+        description: "Please enter a valid number",
+      });
     }
   };
 
@@ -118,7 +122,11 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
     const parsedValue = parseNumber(inputValue);
     
     if (parsedValue === null) {
-      setError('Please enter a valid number');
+      toast({
+        variant: "destructive",
+        title: "Invalid Input",
+        description: "Please enter a valid number",
+      });
       return;
     }
     
@@ -126,7 +134,11 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
     try {
       await onSave(biomarker.id, parsedValue);
     } catch (err) {
-      setError('Failed to save. Please try again.');
+      toast({
+        variant: "destructive",
+        title: "Save Failed",
+        description: "Failed to save. Please try again.",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -135,7 +147,6 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
   // Handle cancel
   const handleCancel = () => {
     setInputValue('');
-    setError(null);
     onCancel(biomarker.id);
   };
 
@@ -144,8 +155,17 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
     if (e.key === 'Enter') {
       e.preventDefault();
       handleSave();
-    } else if (e.key === 'Escape') {
-      e.preventDefault();
+    }
+  };
+
+  // Handle blur event for auto-save
+  const handleBlur = () => {
+    // Only save if there's a valid value and it's different from the original
+    const parsedValue = parseNumber(inputValue);
+    if (parsedValue !== null && parsedValue !== biomarker.value) {
+      handleSave();
+    } else {
+      // If no changes or invalid input, just cancel
       handleCancel();
     }
   };
@@ -161,14 +181,13 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
 
   return (
     <div className={cn(
-      "flex items-center h-14 px-4 py-3",
-      "border-b border-border",
-      "hover:bg-muted/50 transition-colors duration-150 ease-in-out",
+      "flex items-center h-12 py-2",
+      "transition-colors duration-150 ease-in-out",
       "group",
       className
     )}>
       {/* Biomarker Name with Confidence Indicator */}
-      <div className="flex-[0_0_25%] pr-3 flex items-center gap-2">
+      <div className="flex-[0_0_25%] pl-4 pr-1 flex items-center gap-2">
         <div
           className="rounded-sm flex-shrink-0"
           style={{
@@ -186,32 +205,24 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
       {/* Value Input */}
       <div className="flex-[0_0_20%] px-3 flex justify-center">
         {isEditing ? (
-          <div className="relative">
-            <BiomarkerInput
-              ref={inputRef}
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              error={!!error}
-              isLoading={isLoading}
-              disabled={isLoading}
-              className="text-center"
-              aria-label={`Edit ${biomarker.name} value`}
-            />
-            {error && (
-              <div className="absolute -bottom-5 left-0 right-0 flex items-center justify-center text-xs text-destructive">
-                <AlertTriangle className="w-3 h-3 mr-1" />
-                {error}
-              </div>
-            )}
-          </div>
+          <BiomarkerInput
+            ref={inputRef}
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            onBlur={handleBlur}
+            isLoading={isLoading}
+            disabled={isLoading}
+            className="text-right"
+            aria-label={`Edit ${biomarker.name} value`}
+          />
         ) : (
           <BiomarkerInput
             value={formatNumber(biomarker.value)}
             readOnly
             onClick={handleClick}
-            className="cursor-pointer text-center"
+            className="cursor-pointer text-right"
             tabIndex={0}
             aria-label={`Edit ${biomarker.name} value: ${formatNumber(biomarker.value)}`}
           />
@@ -219,56 +230,24 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
       </div>
 
       {/* Unit */}
-      <div className="flex-[0_0_15%] px-3">
+      <div className="flex-[0_0_15%]">
         <span className="text-sm font-normal text-muted-foreground text-left align-middle">
           {biomarker.unit}
         </span>
       </div>
 
       {/* Reference Range */}
-      <div className="flex-[0_0_25%] px-3">
+      <div className="flex-[0_0_25%]">
         <span className="text-sm font-normal text-muted-foreground text-left align-middle">
           {biomarker.referenceRange}
         </span>
       </div>
 
       {/* Status Badge */}
-      <div className="flex-[0_0_15%] px-3 flex items-center justify-end gap-2">
+      <div className="flex-[0_0_15%] pr-4 flex items-center justify-end">
         <Badge variant={getStatusVariant(biomarker.status)} className="text-xs">
           {biomarker.status}
         </Badge>
-        
-        {/* Action Buttons - Only show when editing */}
-        {isEditing && (
-          <div className="flex items-center gap-1">
-            <button
-              onClick={handleSave}
-              disabled={isLoading}
-              className={cn(
-                "p-1 rounded-md",
-                "text-green-500 hover:bg-green-500/10",
-                "disabled:opacity-50 disabled:cursor-not-allowed",
-                "transition-colors duration-150"
-              )}
-              aria-label="Save"
-            >
-              <Check className="w-4 h-4" />
-            </button>
-            <button
-              onClick={handleCancel}
-              disabled={isLoading}
-              className={cn(
-                "p-1 rounded-md",
-                "text-destructive hover:bg-destructive/10",
-                "disabled:opacity-50 disabled:cursor-not-allowed",
-                "transition-colors duration-150"
-              )}
-              aria-label="Cancel"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );
