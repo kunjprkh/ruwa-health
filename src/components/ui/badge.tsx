@@ -46,6 +46,14 @@ const badgeVariants = cva(
           "h-6 px-3 inline-flex items-center justify-center rounded-full text-[13px] font-medium leading-[18px] text-[var(--fg-magenta)] overflow-hidden text-ellipsis whitespace-nowrap border-transparent bg-[var(--opacity-magenta-faint)] hover:bg-[var(--opacity-magenta-pale)]",
         "yellow-secondary":
           "h-6 px-3 inline-flex items-center justify-center rounded-full text-[13px] font-medium leading-[18px] text-[var(--fg-yellow)] overflow-hidden text-ellipsis whitespace-nowrap border-transparent bg-[var(--opacity-yellow-faint)] hover:bg-[var(--opacity-yellow-pale)]",
+        peak:
+          "h-6 px-3 inline-flex items-center justify-center rounded-full text-[13px] font-medium leading-[18px] text-[var(--fg-green)] overflow-hidden text-ellipsis whitespace-nowrap border-transparent bg-[var(--opacity-green-faint)] hover:bg-[var(--opacity-green-pale)]",
+        critical:
+          "h-6 px-3 inline-flex items-center justify-center rounded-full text-[13px] font-medium leading-[18px] text-[var(--fg-red)] overflow-hidden text-ellipsis whitespace-nowrap border-transparent bg-[var(--opacity-red-faint)] hover:bg-[var(--opacity-red-pale)]",
+        out_of_range:
+          "h-6 px-3 inline-flex items-center justify-center rounded-full text-[13px] font-medium leading-[18px] text-[var(--fg-orange)] overflow-hidden text-ellipsis whitespace-nowrap border-transparent bg-[var(--opacity-orange-faint)] hover:bg-[var(--opacity-orange-pale)]",
+        normal:
+          "h-6 px-3 inline-flex items-center justify-center rounded-full text-[13px] font-medium leading-[18px] text-[var(--fg-blue)] overflow-hidden text-ellipsis whitespace-nowrap border-transparent bg-[var(--opacity-blue-faint)] hover:bg-[var(--opacity-blue-pale)]",
       },
     },
     defaultVariants: {
@@ -62,6 +70,17 @@ function Badge({ className, variant, ...props }: BadgeProps) {
   return (
     <div className={cn(badgeVariants({ variant }), className)} {...props} />
   )
+}
+
+// Biomarker badge status helper
+export function getBiomarkerBadgeVariant(status: string): string {
+  const statusMap: Record<string, string> = {
+    'peak': 'peak',
+    'critical': 'critical',
+    'out_of_range': 'out_of_range',
+    'normal': 'normal',
+  };
+  return statusMap[status.toLowerCase()] || 'normal';
 }
 
 export { Badge, badgeVariants }
