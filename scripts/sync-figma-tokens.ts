@@ -34,7 +34,7 @@ async function syncFigmaTokens() {
   console.log(`✅ Found ${tokens.length} design tokens\n`);
 
   // Group tokens by type
-  const tokensByType = tokens.reduce((acc, token) => {
+  const tokensByType: Record<string, any[]> = tokens.reduce((acc, token) => {
     if (!acc[token.type]) acc[token.type] = [];
     acc[token.type].push(token);
     return acc;
@@ -51,9 +51,10 @@ async function syncFigmaTokens() {
 `;
 
   // Process colors
-  if (tokensByType.color) {
+  const colors = tokensByType.color ?? [];
+  if (colors.length > 0) {
     cssContent += '  /* Colors */\n';
-    tokensByType.color.forEach(token => {
+    colors.forEach(token => {
       const cssVarName = token.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
       cssContent += `  --color-${cssVarName}: ${token.value}; /* ${token.description || ''} */\n`;
     });
@@ -61,9 +62,10 @@ async function syncFigmaTokens() {
   }
 
   // Process spacing
-  if (tokensByType.spacing) {
+  const spacing = tokensByType.spacing ?? [];
+  if (spacing.length > 0) {
     cssContent += '  /* Spacing */\n';
-    tokensByType.spacing.forEach(token => {
+    spacing.forEach(token => {
       const cssVarName = token.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
       cssContent += `  --spacing-${cssVarName}: ${token.value}; /* ${token.description || ''} */\n`;
     });
@@ -71,9 +73,10 @@ async function syncFigmaTokens() {
   }
 
   // Process typography
-  if (tokensByType.typography) {
+  const typography = tokensByType.typography ?? [];
+  if (typography.length > 0) {
     cssContent += '  /* Typography */\n';
-    tokensByType.typography.forEach(token => {
+    typography.forEach(token => {
       const cssVarName = token.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
       cssContent += `  --font-${cssVarName}: ${token.value}; /* ${token.description || ''} */\n`;
     });
@@ -81,9 +84,10 @@ async function syncFigmaTokens() {
   }
 
   // Process shadows
-  if (tokensByType.shadow) {
+  const shadow = tokensByType.shadow ?? [];
+  if (shadow.length > 0) {
     cssContent += '  /* Shadows */\n';
-    tokensByType.shadow.forEach(token => {
+    shadow.forEach(token => {
       const cssVarName = token.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
       cssContent += `  --shadow-${cssVarName}: ${token.value}; /* ${token.description || ''} */\n`;
     });
@@ -91,9 +95,10 @@ async function syncFigmaTokens() {
   }
 
   // Process radius
-  if (tokensByType.radius) {
+  const radius = tokensByType.radius ?? [];
+  if (radius.length > 0) {
     cssContent += '  /* Border Radius */\n';
-    tokensByType.radius.forEach(token => {
+    radius.forEach(token => {
       const cssVarName = token.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
       cssContent += `  --radius-${cssVarName}: ${token.value}; /* ${token.description || ''} */\n`;
     });
