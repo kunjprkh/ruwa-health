@@ -82,4 +82,64 @@
 
 body {
   letter-spacing: var(--tracking-normal);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+@layer utilities {
+  /* Typography Utility Classes */
+  .text-extra-large-title {
+    font: var(--typography-extra-large-title);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .text-large-title {
+    font: var(--typography-large-title);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .text-title-1 {
+    font: var(--typography-title-1);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text-title-2 {
+    font: var(--typography-title-2);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text-title-3 {
+    font: var(--typography-title-3);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .text-body {
+    font: var(--typography-body);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-callout {
+    font: var(--typography-callout);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-subheadline {
+    font: var(--typography-subheadline);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-footnote {
+    font: var(--typography-footnote);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-caption-1 {
+    font: var(--typography-caption-1);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-caption-2 {
+    font: var(--typography-caption-2);
+    font-weight: var(--font-weight-regular);
+  }
 }

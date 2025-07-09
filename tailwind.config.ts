@@ -51,6 +51,59 @@ const config: Config = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
+  		fontSize: {
+  			// Semantic font sizes using your tokens
+  			'caption-2': 'var(--font-size-caption-2)',
+  			'caption-1': 'var(--font-size-caption-1)',
+  			'footnote': 'var(--font-size-footnote)',
+  			'subheadline': 'var(--font-size-subheadline)',
+  			'callout': 'var(--font-size-callout)',
+  			'body': 'var(--font-size-body)',
+  			'title-3': 'var(--font-size-title-3)',
+  			'title-2': 'var(--font-size-title-2)',
+  			'title-1': 'var(--font-size-title-1)',
+  			'large-title': 'var(--font-size-large-title)',
+  			'extra-large-title': 'var(--font-size-extra-large-title)',
+  			// Override default Tailwind sizes to use your tokens
+  			'xs': 'var(--font-size-caption-2)',
+  			'sm': 'var(--font-size-caption-1)',
+  			'base': 'var(--font-size-callout)',
+  			'lg': 'var(--font-size-body)',
+  			'xl': 'var(--font-size-title-3)',
+  			'2xl': 'var(--font-size-title-2)',
+  			'3xl': 'var(--font-size-title-1)',
+  			'4xl': 'var(--font-size-large-title)',
+  			'5xl': 'var(--font-size-extra-large-title)'
+  		},
+  		fontWeight: {
+  			'regular': 'var(--font-weight-regular)',
+  			'medium': 'var(--font-weight-medium)',
+  			'semibold': 'var(--font-weight-semibold)',
+  			'bold': 'var(--font-weight-bold)'
+  		},
+  		lineHeight: {
+  			'tight': 'var(--line-height-tight)',
+  			'normal': 'var(--line-height-normal)',
+  			'relaxed': 'var(--line-height-relaxed)'
+  		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
