@@ -14,12 +14,12 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { ChevronRight, Loader2, Mail, Search, AlertCircle } from "lucide-react";
-import BiomarkerTableRow, { type BiomarkerData } from "@/components/ui/biomarker-table-row";
+import BiomarkerTable from "@/components/ui/biomarker-table";
+import { type BiomarkerData } from "@/components/ui/biomarker-table-row";
 
 export default function DesignSystemPage() {
   const [radioValue, setRadioValue] = useState("option1");
   const [selectValue, setSelectValue] = useState("");
-  const [editingBiomarker, setEditingBiomarker] = useState<string | null>(null);
   const [biomarkers, setBiomarkers] = useState<BiomarkerData[]>([
     {
       id: "1",
@@ -59,23 +59,16 @@ export default function DesignSystemPage() {
     }
   ]);
 
-  const handleBiomarkerEdit = (id: string) => {
-    setEditingBiomarker(id);
-  };
 
-  const handleBiomarkerSave = async (id: string, newValue: number): Promise<void> => {
+  const handleBiomarkerUpdate = async (id: string, newValue: number): Promise<void> => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 500));
     
     setBiomarkers(prev => prev.map(b => 
       b.id === id ? { ...b, value: newValue } : b
     ));
-    setEditingBiomarker(null);
   };
 
-  const handleBiomarkerCancel = (_id: string) => {
-    setEditingBiomarker(null);
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -431,33 +424,10 @@ export default function DesignSystemPage() {
               </div>
 
               {/* Biomarker Table */}
-              <div className="border rounded-lg overflow-hidden">
-                {/* Table Header */}
-                <div className="bg-muted/50 border-b px-4 py-3">
-                  <div className="flex items-center h-6 text-sm font-medium text-muted-foreground">
-                    <div className="flex-shrink-0 w-6 mr-3"></div> {/* Confidence indicator space */}
-                    <div className="flex-shrink-0 w-32">Biomarker</div>
-                    <div className="flex-shrink-0 w-24 mx-3 text-right">Value</div>
-                    <div className="flex-shrink-0 w-16">Unit</div>
-                    <div className="flex-1 mx-3">Reference Range</div>
-                    <div className="flex-shrink-0">Status</div>
-                  </div>
-                </div>
-
-                {/* Biomarker Rows */}
-                <div className="bg-background">
-                  {biomarkers.map((biomarker) => (
-                    <BiomarkerTableRow
-                      key={biomarker.id}
-                      biomarker={biomarker}
-                      isEditing={editingBiomarker === biomarker.id}
-                      onEdit={handleBiomarkerEdit}
-                      onSave={handleBiomarkerSave}
-                      onCancel={handleBiomarkerCancel}
-                    />
-                  ))}
-                </div>
-              </div>
+              <BiomarkerTable 
+                data={biomarkers}
+                onValueUpdate={handleBiomarkerUpdate}
+              />
 
               {/* Feature Documentation */}
               <div className="grid gap-6 md:grid-cols-2">

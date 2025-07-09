@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { Check, X, AlertTriangle } from 'lucide-react';
 
@@ -22,6 +21,7 @@ interface BiomarkerTableRowProps {
   onEdit: (id: string) => void;
   onSave: (id: string, newValue: number) => Promise<void>;
   onCancel: (id: string) => void;
+  className?: string;
 }
 
 type InputState = 'default' | 'hover' | 'focused' | 'error';
@@ -32,6 +32,7 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
   onEdit,
   onSave,
   onCancel,
+  className,
 }) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [inputState, setInputState] = useState<InputState>('default');
@@ -57,55 +58,51 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
     return /^\d*\.?\d*$/.test(cleaned) && cleaned !== '';
   };
 
-  // Get confidence indicator style
-  const getConfidenceStyle = (score: number) => {
+  // Get confidence indicator class
+  const getConfidenceClass = (score: number) => {
     if (score >= 90) {
-      return {
-        backgroundColor: 'hsl(142 76% 36%)', // Green
-        width: '4px',
-      };
+      return 'border-green-500';
     } else if (score >= 70) {
-      return {
-        backgroundColor: 'hsl(48 96% 53%)', // Yellow
-        width: '3px',
-      };
+      return 'border-yellow-500';
     } else {
-      return {
-        backgroundColor: 'hsl(0 84% 60%)', // Red
-        width: '2px',
-      };
+      return 'border-red-500';
     }
   };
 
-  // Get status badge variant
-  const getStatusVariant = (status: string) => {
+  // Get status badge styles
+  const getStatusStyles = (status: string) => {
     switch (status) {
       case 'Peak':
-        return 'default';
+        return 'bg-green-500 text-white';
       case 'Out Of Range':
-        return 'destructive';
+        return 'bg-orange-500 text-white';
       case 'Normal':
-        return 'secondary';
+        return 'bg-blue-500 text-white';
       default:
-        return 'secondary';
+        return 'bg-blue-500 text-white';
     }
   };
 
-  // Get input border styles based on state
-  const getInputStyles = (state: InputState) => {
-    const baseStyles = 'transition-all duration-200 ease-in-out';
+  // Get input styles based on state
+  const getInputStyles = (state: InputState, isError: boolean = false) => {
+    const baseStyles = cn(
+      'bg-secondary/50 border rounded-md px-3 py-2',
+      'text-sm font-medium text-foreground',
+      'w-auto min-w-[80px]',
+      'transition-all duration-200 ease-in-out'
+    );
+    
+    if (isError || state === 'error') {
+      return cn(baseStyles, 'border-destructive bg-destructive/10 ring-1 ring-destructive/20');
+    }
     
     switch (state) {
-      case 'default':
-        return cn(baseStyles, 'border border-border');
-      case 'hover':
-        return cn(baseStyles, 'border-2 border-border');
       case 'focused':
-        return cn(baseStyles, 'border-2 border-primary ring-1 ring-ring');
-      case 'error':
-        return cn(baseStyles, 'border-2 border-destructive ring-1 ring-destructive/20');
+        return cn(baseStyles, 'border-input bg-background ring-2 ring-ring ring-offset-2 outline-none');
+      case 'hover':
+        return cn(baseStyles, 'border-input cursor-pointer');
       default:
-        return baseStyles;
+        return cn(baseStyles, 'border-input');
     }
   };
 
@@ -185,26 +182,35 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
     }
   };
 
-  const confidenceStyle = getConfidenceStyle(biomarker.confidenceScore);
+  const confidenceClass = getConfidenceClass(biomarker.confidenceScore);
 
   return (
-    <div className="flex items-center h-11 w-full bg-background border-b border-border">
+    <div className={cn(
+      "relative flex items-center h-14 px-4 py-3",
+      "border-b border-b-[1.5px] border-[#2a2a2a]",
+      "hover:bg-[#2a2a2a] transition-colors duration-150 ease-in-out",
+      "group",
+      className
+    )}>
       {/* Confidence Indicator */}
-      <div className="flex-shrink-0 mr-3">
-        <div
-          className="h-6 rounded-sm"
-          style={confidenceStyle}
-          title={`Confidence: ${biomarker.confidenceScore}%`}
-        />
-      </div>
+      <div
+        className={cn(
+          "absolute left-0 top-0 bottom-0 w-1 h-full",
+          confidenceClass,
+          "transition-colors duration-200 ease-in-out"
+        )}
+        title={`Confidence: ${biomarker.confidenceScore}%`}
+      />
 
       {/* Biomarker Name */}
-      <div className="flex-shrink-0 w-32 text-sm font-medium text-foreground truncate">
-        {biomarker.name}
+      <div className="flex-[0_0_25%] pl-4 pr-3">
+        <span className="text-sm font-medium text-foreground leading-normal">
+          {biomarker.name}
+        </span>
       </div>
 
       {/* Value Input */}
-      <div className="flex-shrink-0 w-24 mx-3 relative">
+      <div className="flex-[0_0_20%] px-3 flex justify-center">
         {isEditing ? (
           <div className="relative">
             <Input
@@ -228,8 +234,8 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
                 }
               }}
               className={cn(
-                'h-8 text-sm text-right pr-8',
-                getInputStyles(inputState)
+                'text-center',
+                getInputStyles(inputState, !!error)
               )}
               disabled={isLoading}
               aria-label={`Edit ${biomarker.name} value`}
@@ -263,9 +269,9 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
             onMouseEnter={() => setInputState('hover')}
             onMouseLeave={() => setInputState('default')}
             className={cn(
-              'h-8 w-full text-sm text-right px-3 rounded-md cursor-pointer',
+              'text-center',
               getInputStyles(inputState),
-              'hover:bg-accent/50 focus:outline-none focus:ring-2 focus:ring-ring'
+              'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2'
             )}
             aria-label={`Edit ${biomarker.name} value: ${formatNumber(biomarker.value)}`}
           >
@@ -286,23 +292,31 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
       </div>
 
       {/* Unit */}
-      <div className="flex-shrink-0 w-16 text-sm text-muted-foreground">
-        {biomarker.unit}
+      <div className="flex-[0_0_15%] px-3">
+        <span className="text-sm font-normal text-muted-foreground text-left align-middle">
+          {biomarker.unit}
+        </span>
       </div>
 
       {/* Reference Range */}
-      <div className="flex-1 mx-3 text-sm text-muted-foreground truncate">
-        {biomarker.referenceRange}
+      <div className="flex-[0_0_25%] px-3">
+        <span className="text-sm font-normal text-muted-foreground text-left align-middle">
+          {biomarker.referenceRange}
+        </span>
       </div>
 
       {/* Status Badge */}
-      <div className="flex-shrink-0">
-        <Badge 
-          variant={getStatusVariant(biomarker.status)}
-          className="text-xs"
-        >
+      <div className="flex-[0_0_15%] px-3 flex justify-end">
+        <span className={cn(
+          "inline-flex items-center justify-center",
+          "h-7 px-3 py-1",
+          "rounded-full",
+          "text-xs font-medium",
+          getStatusStyles(biomarker.status),
+          "transition-colors duration-200"
+        )}>
           {biomarker.status}
-        </Badge>
+        </span>
       </div>
     </div>
   );
