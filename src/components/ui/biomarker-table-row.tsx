@@ -60,18 +60,18 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
   const getConfidenceStyle = (score: number) => {
     if (score >= 90) {
       return {
-        backgroundColor: 'hsl(142 76% 36%)', // Green
-        width: '4px',
+        backgroundColor: '#c9c9cd', // gray-80
+        width: '6px',
       };
     } else if (score >= 70) {
       return {
-        backgroundColor: 'hsl(48 96% 53%)', // Yellow
-        width: '3px',
+        backgroundColor: '#555556', // gray-40
+        width: '6px',
       };
     } else {
       return {
-        backgroundColor: 'hsl(0 84% 60%)', // Red
-        width: '2px',
+        backgroundColor: '#232324', // gray-20
+        width: '6px',
       };
     }
   };

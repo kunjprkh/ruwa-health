@@ -488,21 +488,21 @@ export default function DesignSystemPage() {
                   </CardHeader>
                   <CardContent className="space-y-3 text-sm">
                     <div className="flex items-start gap-2">
-                      <div className="w-1 h-6 bg-green-600 rounded-sm flex-shrink-0"></div>
+                      <div className="h-6 rounded-sm flex-shrink-0" style={{width: '6px', backgroundColor: '#c9c9cd'}}></div>
                       <div>
-                        <strong>High Confidence (≥90%):</strong> Green thick line
+                        <strong>High Confidence (≥90%):</strong> gray-80
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <div className="w-1 h-6 bg-yellow-500 rounded-sm flex-shrink-0" style={{width: '3px'}}></div>
+                      <div className="h-6 rounded-sm flex-shrink-0" style={{width: '6px', backgroundColor: '#555556'}}></div>
                       <div>
-                        <strong>Medium Confidence (70-89%):</strong> Yellow medium line
+                        <strong>Medium Confidence (70-89%):</strong> gray-40
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <div className="w-1 h-6 bg-red-500 rounded-sm flex-shrink-0" style={{width: '2px'}}></div>
+                      <div className="h-6 rounded-sm flex-shrink-0" style={{width: '6px', backgroundColor: '#232324'}}></div>
                       <div>
-                        <strong>Low Confidence (&lt;70%):</strong> Red thin line
+                        <strong>Low Confidence (&lt;70%):</strong> gray-20
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
