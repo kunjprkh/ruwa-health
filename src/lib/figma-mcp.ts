@@ -31,9 +31,9 @@ export class FigmaMCPService {
 
   constructor(config?: FigmaConfig) {
     this.config = {
-      accessToken: config?.accessToken || process.env.FIGMA_ACCESS_TOKEN,
-      fileKey: config?.fileKey || process.env.FIGMA_FILE_KEY,
-      teamId: config?.teamId || process.env.FIGMA_TEAM_ID,
+      accessToken: config?.accessToken || process.env.FIGMA_ACCESS_TOKEN || '',
+      fileKey: config?.fileKey || process.env.FIGMA_FILE_KEY || '',
+      teamId: config?.teamId || process.env.FIGMA_TEAM_ID || '',
     };
     
     this.mcpEndpoint = process.env.FIGMA_MCP_ENDPOINT || 'http://localhost:3001';
@@ -59,8 +59,8 @@ export class FigmaMCPService {
     try {
       const response = await fetch(`${this.mcpEndpoint}/tokens`, {
         headers: {
-          'Authorization': `Bearer ${this.config.accessToken}`,
-          'X-Figma-File-Key': this.config.fileKey || '',
+          'Authorization': `Bearer ${this.config.accessToken ?? ''}`,
+          'X-Figma-File-Key': this.config.fileKey ?? '',
         },
       });
 
@@ -82,8 +82,8 @@ export class FigmaMCPService {
     try {
       const response = await fetch(`${this.mcpEndpoint}/components`, {
         headers: {
-          'Authorization': `Bearer ${this.config.accessToken}`,
-          'X-Figma-File-Key': this.config.fileKey || '',
+          'Authorization': `Bearer ${this.config.accessToken ?? ''}`,
+          'X-Figma-File-Key': this.config.fileKey ?? '',
         },
       });
 
@@ -96,45 +96,6 @@ export class FigmaMCPService {
       console.error('Error fetching components:', error);
       return [];
     }
-  }
-
-  /**
-   * Sync design tokens to local CSS variables
-   */
-  async syncTokensToCSS(): Promise<void> {
-    const tokens = await this.getDesignTokens();
-    
-    // Group tokens by type
-    const tokensByType = tokens.reduce((acc, token) => {
-      if (!acc[token.type]) acc[token.type] = [];
-      acc[token.type].push(token);
-      return acc;
-    }, {} as Record<string, DesignToken[]>);
-
-    // Generate CSS variables
-    let cssContent = ':root {\n';
-    
-    // Colors
-    if (tokensByType.color) {
-      cssContent += '  /* Colors from Figma */\n';
-      tokensByType.color.forEach(token => {
-        cssContent += `  --${token.name}: ${token.value};\n`;
-      });
-    }
-
-    // Spacing
-    if (tokensByType.spacing) {
-      cssContent += '\n  /* Spacing from Figma */\n';
-      tokensByType.spacing.forEach(token => {
-        cssContent += `  --${token.name}: ${token.value};\n`;
-      });
-    }
-
-    // Add other token types...
-    cssContent += '}\n';
-
-    // You can write this to a CSS file or return it
-    console.log('Generated CSS:', cssContent);
   }
 }
 
