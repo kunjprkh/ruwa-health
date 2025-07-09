@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
-import BiomarkerTableRow, { BiomarkerData } from './biomarker-table-row';
+import BiomarkerTableRow from './biomarker-table-row';
+import type { BiomarkerData } from './biomarker-table-row';
 
 interface BiomarkerTableProps {
   data: BiomarkerData[];
