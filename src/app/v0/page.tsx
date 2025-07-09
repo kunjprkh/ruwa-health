@@ -408,6 +408,13 @@ export default function DesignSystemPage() {
                   <Badge variant="magenta-secondary">Magenta Secondary</Badge>
                   <Badge variant="yellow-secondary">Yellow Secondary</Badge>
                 </div>
+                {/* Biomarker Status Badges */}
+                <div className="flex flex-wrap gap-6 mt-4">
+                  <Badge variant="peak">Peak</Badge>
+                  <Badge variant="critical">Critical</Badge>
+                  <Badge variant="out_of_range">Out Of Range</Badge>
+                  <Badge variant="normal">Normal</Badge>
+                </div>
               </div>
 
               {/* Alert */}
