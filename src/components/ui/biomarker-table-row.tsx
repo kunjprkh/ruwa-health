@@ -161,21 +161,23 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
 
   return (
     <div className={cn(
-      "relative flex items-center h-14 px-4 py-3",
+      "flex items-center h-14 px-4 py-3",
       "border-b border-border",
       "hover:bg-muted/50 transition-colors duration-150 ease-in-out",
       "group",
       className
     )}>
-      {/* Confidence Indicator */}
-      <div
-        className="absolute left-0 top-0 bottom-0 transition-all duration-200 ease-in-out"
-        style={confidenceStyle}
-        title={`Confidence: ${biomarker.confidenceScore}%`}
-      />
-
-      {/* Biomarker Name */}
-      <div className="flex-[0_0_25%] pl-4 pr-3">
+      {/* Biomarker Name with Confidence Indicator */}
+      <div className="flex-[0_0_25%] pr-3 flex items-center gap-2">
+        <div
+          className="rounded-sm flex-shrink-0"
+          style={{
+            ...confidenceStyle,
+            height: '20px',
+            alignSelf: 'stretch'
+          }}
+          title={`Confidence: ${biomarker.confidenceScore}%`}
+        />
         <span className="text-sm font-medium text-foreground leading-normal">
           {biomarker.name}
         </span>
