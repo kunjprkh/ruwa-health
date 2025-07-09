@@ -36,18 +36,16 @@ const BiomarkerTable: React.FC<BiomarkerTableProps> = ({
   return (
     <div className={cn(
       "w-full overflow-hidden",
-      "bg-[#1a1a1a] dark:bg-[#1a1a1a]",
-      "border border-[#333] border-[1.5px]",
+      "bg-card",
       "rounded-lg",
-      "p-4",
       className
     )}>
       {/* Table Header */}
       <div className={cn(
         "flex items-center h-12 px-4 mb-2",
-        "bg-[#111] dark:bg-[#111]",
+        "bg-muted",
         "rounded-md",
-        "text-[#888] dark:text-[#888]",
+        "text-muted-foreground",
         "text-sm font-medium"
       )}>
         <div className="flex-[0_0_25%] pl-4">Biomarker</div>
