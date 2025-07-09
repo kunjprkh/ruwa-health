@@ -63,21 +63,6 @@ async function fetchFigmaFile(fileKey: string, accessToken: string) {
   return await response.json();
 }
 
-async function fetchComponentNodes(fileKey: string, componentIds: string[], accessToken: string) {
-  const ids = componentIds.join(',');
-  const response = await fetch(`https://api.figma.com/v1/files/${fileKey}/nodes?ids=${ids}`, {
-    headers: {
-      'X-Figma-Token': accessToken,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch component nodes: ${response.statusText}`);
-  }
-
-  return await response.json();
-}
-
 function findBiomarkerTableNodes(node: FigmaNode, results: FigmaNode[] = []): FigmaNode[] {
   if (node.name && node.name.toLowerCase().includes('biomarker') && 
       (node.name.toLowerCase().includes('table') || node.type === 'INSTANCE')) {
