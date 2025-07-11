@@ -78,19 +78,14 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
 
   // Get status badge variant
   const getStatusVariant = (status: string) => {
-    switch (status) {
-      case 'Peak':
-        return 'green';
-      case 'Critical':
-        return 'red';
-      case 'Out Of Range':
-        return 'orange';
-      case 'Normal':
-        return 'blue';
-      default:
-        return 'blue';
+    switch(status.toLowerCase()) {
+      case "peak": return "peak"
+      case "critical": return "critical"
+      case "out of range": return "out_of_range"
+      case "normal": return "normal"
+      default: return "outline"
     }
-  };
+  }
 
 
   // Initialize input value when editing starts
