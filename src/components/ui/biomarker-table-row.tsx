@@ -92,7 +92,6 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
     }
   };
 
-
   // Initialize input value when editing starts
   useEffect(() => {
     if (isEditing) {
@@ -245,7 +244,7 @@ const BiomarkerTableRow: React.FC<BiomarkerTableRowProps> = ({
 
       {/* Status Badge */}
       <div className="flex-[0_0_15%] pr-4 flex items-center justify-end">
-        <Badge variant={getStatusVariant(biomarker.status)} className="text-xs">
+        <Badge variant={getStatusVariant(biomarker.status) as any} className="text-xs">
           {biomarker.status}
         </Badge>
       </div>
