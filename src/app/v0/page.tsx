@@ -13,9 +13,24 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
-import { ChevronRight, Loader2, Mail, Search, AlertCircle } from "lucide-react";
+import { ChevronRight, Loader2, Mail, Search, AlertCircle, Users, FileText, TestTube, BarChart3, Clock, Menu, CircleUser } from "lucide-react";
 import BiomarkerTable from "@/components/ui/biomarker-table";
 import { type BiomarkerData } from "@/components/ui/biomarker-table-row";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 
 export default function DesignSystemPage() {
   const [radioValue, setRadioValue] = useState("option1");
@@ -81,10 +96,11 @@ export default function DesignSystemPage() {
         </div>
 
         <Tabs defaultValue="buttons" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="buttons">Buttons</TabsTrigger>
             <TabsTrigger value="inputs">Inputs</TabsTrigger>
             <TabsTrigger value="controls">Controls</TabsTrigger>
+            <TabsTrigger value="navigation">Navigation</TabsTrigger>
             <TabsTrigger value="basic">Basic</TabsTrigger>
             <TabsTrigger value="biomarker">Biomarker</TabsTrigger>
           </TabsList>
@@ -312,6 +328,334 @@ export default function DesignSystemPage() {
                       <SelectItem value="blueberry">Blueberry</SelectItem>
                     </SelectContent>
                   </Select>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="navigation" className="mt-6">
+            <div className="space-y-8">
+              {/* Healthcare Dashboard Sidebar */}
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Healthcare Dashboard Sidebar</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Main clinician dashboard navigation with patient-focused menu items.
+                  </p>
+                </div>
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="h-[500px] flex">
+                    <SidebarProvider>
+                      <Sidebar className="border-r">
+                        <SidebarHeader className="border-b px-4 py-3">
+                          <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 rounded-full bg-white border" />
+                            <span className="font-semibold">Ruwa Health</span>
+                          </div>
+                        </SidebarHeader>
+                        <SidebarContent>
+                          <SidebarGroup>
+                            <SidebarGroupContent>
+                              <SidebarMenu>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <Users className="h-4 w-4" />
+                                      <span>Patients</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <FileText className="h-4 w-4" />
+                                      <span>Tests</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <TestTube className="h-4 w-4" />
+                                      <span>Labs</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <BarChart3 className="h-4 w-4" />
+                                      <span>Insights</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <Clock className="h-4 w-4" />
+                                      <span>Logs</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              </SidebarMenu>
+                            </SidebarGroupContent>
+                          </SidebarGroup>
+                        </SidebarContent>
+                        <SidebarFooter className="border-t p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-muted" />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium truncate">Dr. Sarah Johnson</p>
+                              <p className="text-xs text-muted-foreground">Clinician</p>
+                            </div>
+                          </div>
+                        </SidebarFooter>
+                      </Sidebar>
+                      <SidebarInset className="flex-1">
+                        <div className="h-full p-6 bg-muted/50">
+                          <div className="mb-4 flex items-center gap-2">
+                            <SidebarTrigger className="-ml-1" />
+                            <h2 className="text-lg font-semibold">Dashboard Content</h2>
+                          </div>
+                          <p className="text-muted-foreground">
+                            Main content area with sidebar toggle button.
+                          </p>
+                        </div>
+                      </SidebarInset>
+                    </SidebarProvider>
+                  </div>
+                </div>
+              </div>
+
+              {/* Collapsible Sidebar */}
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Collapsible Sidebar</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Sidebar that can expand and collapse with animation.
+                  </p>
+                </div>
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="h-[400px] flex">
+                    <SidebarProvider defaultOpen={false}>
+                      <Sidebar collapsible="icon">
+                        <SidebarHeader className="border-b">
+                          <SidebarMenu>
+                            <SidebarMenuItem>
+                              <SidebarMenuButton size="lg" asChild>
+                                <a href="#">
+                                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                    R
+                                  </div>
+                                  <div className="flex flex-col gap-0.5 leading-none">
+                                    <span className="font-semibold">Ruwa</span>
+                                    <span className="text-xs">Health Platform</span>
+                                  </div>
+                                </a>
+                              </SidebarMenuButton>
+                            </SidebarMenuItem>
+                          </SidebarMenu>
+                        </SidebarHeader>
+                        <SidebarContent>
+                          <SidebarGroup>
+                            <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+                            <SidebarGroupContent>
+                              <SidebarMenu>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton tooltip="Dashboard">
+                                    <BarChart3 className="h-4 w-4" />
+                                    <span>Dashboard</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton tooltip="Patients">
+                                    <Users className="h-4 w-4" />
+                                    <span>Patients</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton tooltip="Reports">
+                                    <FileText className="h-4 w-4" />
+                                    <span>Reports</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              </SidebarMenu>
+                            </SidebarGroupContent>
+                          </SidebarGroup>
+                        </SidebarContent>
+                      </Sidebar>
+                      <SidebarInset className="flex-1">
+                        <div className="h-full p-6 bg-muted/50">
+                          <div className="mb-4">
+                            <SidebarTrigger />
+                          </div>
+                          <p className="text-muted-foreground">
+                            Click the menu button to toggle the sidebar.
+                          </p>
+                        </div>
+                      </SidebarInset>
+                    </SidebarProvider>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sidebar with Groups */}
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Sidebar with Groups</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Organized navigation with labeled groups.
+                  </p>
+                </div>
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="h-[500px] flex">
+                    <SidebarProvider>
+                      <Sidebar>
+                        <SidebarHeader className="border-b px-4 py-3">
+                          <h2 className="text-lg font-semibold">Medical Portal</h2>
+                        </SidebarHeader>
+                        <SidebarContent>
+                          <SidebarGroup>
+                            <SidebarGroupLabel>Patient Management</SidebarGroupLabel>
+                            <SidebarGroupContent>
+                              <SidebarMenu>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton>
+                                    <Users className="h-4 w-4" />
+                                    <span>All Patients</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton>
+                                    <Clock className="h-4 w-4" />
+                                    <span>Appointments</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              </SidebarMenu>
+                            </SidebarGroupContent>
+                          </SidebarGroup>
+                          <SidebarGroup>
+                            <SidebarGroupLabel>Laboratory</SidebarGroupLabel>
+                            <SidebarGroupContent>
+                              <SidebarMenu>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton>
+                                    <TestTube className="h-4 w-4" />
+                                    <span>Lab Results</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton>
+                                    <FileText className="h-4 w-4" />
+                                    <span>Test Orders</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              </SidebarMenu>
+                            </SidebarGroupContent>
+                          </SidebarGroup>
+                          <SidebarGroup>
+                            <SidebarGroupLabel>Analytics</SidebarGroupLabel>
+                            <SidebarGroupContent>
+                              <SidebarMenu>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton>
+                                    <BarChart3 className="h-4 w-4" />
+                                    <span>Reports</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              </SidebarMenu>
+                            </SidebarGroupContent>
+                          </SidebarGroup>
+                        </SidebarContent>
+                      </Sidebar>
+                      <SidebarInset className="flex-1">
+                        <div className="h-full p-6 bg-muted/50">
+                          <h2 className="text-lg font-semibold mb-2">Grouped Navigation</h2>
+                          <p className="text-muted-foreground">
+                            Navigation items organized into logical groups.
+                          </p>
+                        </div>
+                      </SidebarInset>
+                    </SidebarProvider>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile-Responsive Sidebar */}
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Mobile-Responsive Sidebar</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Sidebar with sheet behavior on mobile devices.
+                  </p>
+                </div>
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="h-[400px] flex">
+                    <SidebarProvider>
+                      <Sidebar>
+                        <SidebarHeader className="border-b">
+                          <SidebarMenu>
+                            <SidebarMenuItem>
+                              <SidebarMenuButton size="lg">
+                                <Menu className="h-4 w-4" />
+                                <span>Mobile Menu</span>
+                              </SidebarMenuButton>
+                            </SidebarMenuItem>
+                          </SidebarMenu>
+                        </SidebarHeader>
+                        <SidebarContent>
+                          <SidebarGroup>
+                            <SidebarGroupContent>
+                              <SidebarMenu>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton>
+                                    <Users className="h-4 w-4" />
+                                    <span>Patients</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton>
+                                    <FileText className="h-4 w-4" />
+                                    <span>Documents</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton>
+                                    <BarChart3 className="h-4 w-4" />
+                                    <span>Analytics</span>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              </SidebarMenu>
+                            </SidebarGroupContent>
+                          </SidebarGroup>
+                        </SidebarContent>
+                        <SidebarFooter>
+                          <SidebarMenu>
+                            <SidebarMenuItem>
+                              <SidebarMenuButton>
+                                <CircleUser className="h-4 w-4" />
+                                <span>Profile</span>
+                              </SidebarMenuButton>
+                            </SidebarMenuItem>
+                          </SidebarMenu>
+                        </SidebarFooter>
+                      </Sidebar>
+                      <SidebarInset className="flex-1">
+                        <div className="h-full p-4 bg-muted/50">
+                          <div className="mb-4">
+                            <SidebarTrigger />
+                          </div>
+                          <div className="max-w-md">
+                            <h2 className="text-lg font-semibold mb-2">Responsive Design</h2>
+                            <p className="text-sm text-muted-foreground">
+                              On mobile devices, the sidebar transforms into a sheet overlay.
+                              Try resizing your browser to see the responsive behavior.
+                            </p>
+                          </div>
+                        </div>
+                      </SidebarInset>
+                    </SidebarProvider>
+                  </div>
                 </div>
               </div>
             </div>
