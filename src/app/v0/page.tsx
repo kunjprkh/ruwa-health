@@ -40,6 +40,7 @@ import {
   PaginationNext,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
+import { Progress } from "@/components/ui/progress";
 
 export default function DesignSystemPage() {
   const [radioValue, setRadioValue] = useState("option1");
@@ -819,6 +820,15 @@ export default function DesignSystemPage() {
                     </PaginationItem>
                   </PaginationContent>
                 </Pagination>
+              </div>
+
+              {/* Progress */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Progress</h3>
+                <div className="w-full max-w-md">
+                  <Progress value={33} />
+                  <div className="mt-2 text-sm text-muted-foreground">33% Complete</div>
+                </div>
               </div>
             </div>
           </TabsContent>
