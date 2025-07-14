@@ -357,10 +357,12 @@ export default function DesignSystemPage() {
                   <div className="h-[500px] flex">
                     <SidebarProvider>
                       <Sidebar className="border-r">
-                        <SidebarHeader className="border-b px-4 py-3">
-                          <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-full bg-white border" />
-                            <span className="font-semibold">Ruwa Health</span>
+                        <SidebarHeader className="px-6 py-3">
+                          <div className="flex items-center justify-between w-full">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-white border" />
+                            </div>
+                            <div className="w-8 h-8 rounded-full bg-muted" />
                           </div>
                         </SidebarHeader>
                         <SidebarContent>
@@ -406,15 +408,6 @@ export default function DesignSystemPage() {
                             </SidebarGroupContent>
                           </SidebarGroup>
                         </SidebarContent>
-                        <SidebarFooter className="border-t p-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-muted" />
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium truncate">Dr. Sarah Johnson</p>
-                              <p className="text-xs text-muted-foreground">Clinician</p>
-                            </div>
-                          </div>
-                        </SidebarFooter>
                       </Sidebar>
                       <SidebarInset className="flex-1">
                         <div className="h-full p-6 bg-muted/50">

@@ -12,7 +12,7 @@ const nextConfig = {
   },
   experimental: {
     // Enable experimental features if needed
-    optimizePackageImports: ['lucide-react'],
+    // optimizePackageImports: ['lucide-react'],
   },
   images: {
     // Configure image optimization
