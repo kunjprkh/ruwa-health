@@ -41,6 +41,7 @@ import {
   PaginationEllipsis,
 } from "@/components/ui/pagination";
 import { Progress } from "@/components/ui/progress";
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 
 export default function DesignSystemPage() {
   const [radioValue, setRadioValue] = useState("option1");
@@ -106,13 +107,14 @@ export default function DesignSystemPage() {
         </div>
 
         <Tabs defaultValue="buttons" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="buttons">Buttons</TabsTrigger>
             <TabsTrigger value="inputs">Inputs</TabsTrigger>
             <TabsTrigger value="controls">Controls</TabsTrigger>
             <TabsTrigger value="navigation">Navigation</TabsTrigger>
             <TabsTrigger value="basic">Basic</TabsTrigger>
             <TabsTrigger value="biomarker">Biomarker</TabsTrigger>
+            <TabsTrigger value="sheet">Sheet</TabsTrigger>
           </TabsList>
 
           <TabsContent value="buttons" className="mt-6">
@@ -982,6 +984,27 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </TabsContent>
+
+          {/* Sheet Demo */}
+          <TabsContent value="sheet" className="mt-6">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Sheet (Drawer) Demo</h3>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button>Open Sheet</Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Sheet Title</SheetTitle>
+                    <SheetDescription>
+                      This is a demo of the Sheet (drawer) component from shadcn/ui. You can put any content here.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="py-4">Your custom content goes here.</div>
+                </SheetContent>
+              </Sheet>
             </div>
           </TabsContent>
         </Tabs>
