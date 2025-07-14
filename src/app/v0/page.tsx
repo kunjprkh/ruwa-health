@@ -170,6 +170,45 @@ export default function DesignSystemPage() {
                   <Button variant="outline" disabled>Disabled Outline</Button>
                 </div>
               </div>
+
+              <section className="space-y-4 px-4 py-4">
+                {/* Existing Button examples */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" size="sm">Small Secondary</Button>
+                  <Button variant="secondary" size="lg">Large Secondary</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="destructive" size="sm">Small Destructive</Button>
+                  <Button variant="destructive" size="lg">Large Destructive</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="outline" size="sm">Small Outline</Button>
+                  <Button variant="outline" size="lg">Large Outline</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="ghost" size="sm">Small Ghost</Button>
+                  <Button variant="ghost" size="lg">Large Ghost</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="link" size="sm">Small Link</Button>
+                  <Button variant="link" size="lg">Large Link</Button>
+                </div>
+                {/* Loading Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" size="sm" isLoading>Small Loading</Button>
+                  <Button variant="secondary" size="lg" isLoading>Large Loading</Button>
+                </div>
+                {/* Disabled Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" size="sm" disabled>Small Disabled</Button>
+                  <Button variant="secondary" size="lg" disabled>Large Disabled</Button>
+                </div>
+                {/* Disabled Outline Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="outline" size="sm" disabled>Small Disabled Outline</Button>
+                  <Button variant="outline" size="lg" disabled>Large Disabled Outline</Button>
+                </div>
+              </section>
             </div>
           </TabsContent>
 
