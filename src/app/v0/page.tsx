@@ -370,7 +370,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <Users className="h-4 w-4" />
                                       <span>Patients</span>
                                     </a>
                                   </SidebarMenuButton>
@@ -378,7 +377,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <FileText className="h-4 w-4" />
                                       <span>Tests</span>
                                     </a>
                                   </SidebarMenuButton>
@@ -386,7 +384,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <TestTube className="h-4 w-4" />
                                       <span>Labs</span>
                                     </a>
                                   </SidebarMenuButton>
@@ -394,7 +391,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <BarChart3 className="h-4 w-4" />
                                       <span>Insights</span>
                                     </a>
                                   </SidebarMenuButton>
@@ -402,7 +398,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <Clock className="h-4 w-4" />
                                       <span>Logs</span>
                                     </a>
                                   </SidebarMenuButton>
