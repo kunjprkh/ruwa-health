@@ -189,14 +189,14 @@ export default function DesignSystemPage() {
                   <Button variant="ghost" size="sm">Small Ghost</Button>
                   <Button variant="ghost" size="lg">Large Ghost</Button>
                 </div>
+                {/* Link Buttons */}
                 <div className="flex gap-4">
                   <Button variant="link" size="sm">Small Link</Button>
                   <Button variant="link" size="lg">Large Link</Button>
                 </div>
-                {/* Loading Buttons */}
+                {/* Loading Button (default size) */}
                 <div className="flex gap-4">
-                  <Button variant="secondary" size="sm" isLoading>Small Loading</Button>
-                  <Button variant="secondary" size="lg" isLoading>Large Loading</Button>
+                  <Button variant="secondary" isLoading>Loading</Button>
                 </div>
                 {/* Disabled Buttons */}
                 <div className="flex gap-4">
