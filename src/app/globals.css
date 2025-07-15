@@ -26,10 +26,18 @@
     --input: 0 0% 97%;
     --ring: 0 0% 21%;
     --radius: 0.6rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 0 0% 15%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 98%;
     --card: 0 0% 15%;
     --card-foreground: 0 0% 98%;
@@ -48,10 +56,16 @@
     --border: 0 0% 28%;
     --input: 0 0% 37%;
     --ring: 0 0% 92%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
@@ -144,4 +158,16 @@ body {
     font: var(--typography-caption-2);
     font-weight: var(--font-weight-regular);
   }
+}
+
+/* Input label spacing to match Figma */
+label + input,
+label + textarea {
+  margin-top: 6px;
+}
+
+/* Alternative approach - if labels are wrapped in divs */
+.space-y-2 > label + input,
+.space-y-2 > label + textarea {
+  margin-top: 12px !important;
 }
