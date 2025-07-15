@@ -43,7 +43,6 @@ import {
 
 import { Progress } from "@/components/ui/progress";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-n
 
 export default function DesignSystemPage() {
   const [radioValue, setRadioValue] = useState("option1");
