@@ -159,3 +159,15 @@ body {
     font-weight: var(--font-weight-regular);
   }
 }
+
+/* Input label spacing to match Figma */
+label + input,
+label + textarea {
+  margin-top: 6px;
+}
+
+/* Alternative approach - if labels are wrapped in divs */
+.space-y-2 > label + input,
+.space-y-2 > label + textarea {
+  margin-top: 12px !important;
+}
