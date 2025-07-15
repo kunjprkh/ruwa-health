@@ -42,6 +42,9 @@ import {
 } from "@/components/ui/pagination";
 import { Progress } from "@/components/ui/progress";
 
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+
+
 export default function DesignSystemPage() {
   const [radioValue, setRadioValue] = useState("option1");
   const [selectValue, setSelectValue] = useState("");
@@ -106,13 +109,14 @@ export default function DesignSystemPage() {
         </div>
 
         <Tabs defaultValue="buttons" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="buttons">Buttons</TabsTrigger>
             <TabsTrigger value="inputs">Inputs</TabsTrigger>
             <TabsTrigger value="controls">Controls</TabsTrigger>
             <TabsTrigger value="navigation">Navigation</TabsTrigger>
             <TabsTrigger value="basic">Basic</TabsTrigger>
             <TabsTrigger value="biomarker">Biomarker</TabsTrigger>
+            <TabsTrigger value="sheet">Sheet</TabsTrigger>
           </TabsList>
 
           <TabsContent value="buttons" className="mt-6">
@@ -170,6 +174,45 @@ export default function DesignSystemPage() {
                   <Button variant="outline" disabled>Disabled Outline</Button>
                 </div>
               </div>
+
+              <section className="space-y-4 px-4 py-4">
+                {/* Existing Button examples */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" size="sm">Small Secondary</Button>
+                  <Button variant="secondary" size="lg">Large Secondary</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="destructive" size="sm">Small Destructive</Button>
+                  <Button variant="destructive" size="lg">Large Destructive</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="outline" size="sm">Small Outline</Button>
+                  <Button variant="outline" size="lg">Large Outline</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="ghost" size="sm">Small Ghost</Button>
+                  <Button variant="ghost" size="lg">Large Ghost</Button>
+                </div>
+                {/* Link Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="link" size="sm">Small Link</Button>
+                  <Button variant="link" size="lg">Large Link</Button>
+                </div>
+                {/* Loading Button (default size) */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" isLoading>Loading</Button>
+                </div>
+                {/* Disabled Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" size="sm" disabled>Small Disabled</Button>
+                  <Button variant="secondary" size="lg" disabled>Large Disabled</Button>
+                </div>
+                {/* Disabled Outline Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="outline" size="sm" disabled>Small Disabled Outline</Button>
+                  <Button variant="outline" size="lg" disabled>Large Disabled Outline</Button>
+                </div>
+              </section>
             </div>
           </TabsContent>
 
@@ -943,6 +986,27 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </TabsContent>
+
+          {/* Sheet Demo */}
+          <TabsContent value="sheet" className="mt-6">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Sheet (Drawer) Demo</h3>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button>Open Sheet</Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Sheet Title</SheetTitle>
+                    <SheetDescription>
+                      This is a demo of the Sheet (drawer) component from shadcn/ui. You can put any content here.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="py-4">Your custom content goes here.</div>
+                </SheetContent>
+              </Sheet>
             </div>
           </TabsContent>
         </Tabs>
