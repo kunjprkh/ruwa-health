@@ -2,12 +2,10 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-export interface TextareaProps extends React.ComponentProps<"textarea"> {
-  error?: boolean
-}
+export interface TextareaProps extends React.ComponentProps<"textarea"> {}
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, error, ...props }, ref) => {
+  ({ className, ...props }, ref) => {
     return (
       <textarea
         className={cn(
@@ -19,6 +17,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           error
             ? "border-destructive focus-visible:ring-destructive"
             : "border-input focus-visible:border-ring",
+          "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:bg-muted disabled:opacity-50",
           className
         )}
         ref={ref}
