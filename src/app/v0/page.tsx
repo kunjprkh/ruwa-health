@@ -41,6 +41,10 @@ import {
   PaginationEllipsis,
 } from "@/components/ui/pagination";
 
+import { Progress } from "@/components/ui/progress";
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+n
+
 export default function DesignSystemPage() {
   const [radioValue, setRadioValue] = useState("option1");
   const [selectValue, setSelectValue] = useState("");
@@ -105,13 +109,14 @@ export default function DesignSystemPage() {
         </div>
 
         <Tabs defaultValue="buttons" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="buttons">Buttons</TabsTrigger>
             <TabsTrigger value="inputs">Inputs</TabsTrigger>
             <TabsTrigger value="controls">Controls</TabsTrigger>
             <TabsTrigger value="navigation">Navigation</TabsTrigger>
             <TabsTrigger value="basic">Basic</TabsTrigger>
             <TabsTrigger value="biomarker">Biomarker</TabsTrigger>
+            <TabsTrigger value="sheet">Sheet</TabsTrigger>
           </TabsList>
 
           <TabsContent value="buttons" className="mt-6">
@@ -169,6 +174,45 @@ export default function DesignSystemPage() {
                   <Button variant="outline" disabled>Disabled Outline</Button>
                 </div>
               </div>
+
+              <section className="space-y-4 px-4 py-4">
+                {/* Existing Button examples */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" size="sm">Small Secondary</Button>
+                  <Button variant="secondary" size="lg">Large Secondary</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="destructive" size="sm">Small Destructive</Button>
+                  <Button variant="destructive" size="lg">Large Destructive</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="outline" size="sm">Small Outline</Button>
+                  <Button variant="outline" size="lg">Large Outline</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="ghost" size="sm">Small Ghost</Button>
+                  <Button variant="ghost" size="lg">Large Ghost</Button>
+                </div>
+                {/* Link Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="link" size="sm">Small Link</Button>
+                  <Button variant="link" size="lg">Large Link</Button>
+                </div>
+                {/* Loading Button (default size) */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" isLoading>Loading</Button>
+                </div>
+                {/* Disabled Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" size="sm" disabled>Small Disabled</Button>
+                  <Button variant="secondary" size="lg" disabled>Large Disabled</Button>
+                </div>
+                {/* Disabled Outline Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="outline" size="sm" disabled>Small Disabled Outline</Button>
+                  <Button variant="outline" size="lg" disabled>Large Disabled Outline</Button>
+                </div>
+              </section>
             </div>
           </TabsContent>
 
@@ -356,10 +400,12 @@ export default function DesignSystemPage() {
                   <div className="h-[500px] flex">
                     <SidebarProvider>
                       <Sidebar className="border-r">
-                        <SidebarHeader className="border-b px-4 py-3">
-                          <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-full bg-white border" />
-                            <span className="font-semibold">Ruwa Health</span>
+                        <SidebarHeader className="px-6 py-3">
+                          <div className="flex items-center justify-between w-full">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-white border" />
+                            </div>
+                            <div className="w-8 h-8 rounded-full bg-muted" />
                           </div>
                         </SidebarHeader>
                         <SidebarContent>
@@ -369,7 +415,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <Users className="h-4 w-4" />
                                       <span>Patients</span>
                                     </a>
                                   </SidebarMenuButton>
@@ -377,7 +422,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <FileText className="h-4 w-4" />
                                       <span>Tests</span>
                                     </a>
                                   </SidebarMenuButton>
@@ -385,7 +429,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <TestTube className="h-4 w-4" />
                                       <span>Labs</span>
                                     </a>
                                   </SidebarMenuButton>
@@ -393,7 +436,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <BarChart3 className="h-4 w-4" />
                                       <span>Insights</span>
                                     </a>
                                   </SidebarMenuButton>
@@ -401,7 +443,6 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton asChild>
                                     <a href="#" className="flex items-center gap-3">
-                                      <Clock className="h-4 w-4" />
                                       <span>Logs</span>
                                     </a>
                                   </SidebarMenuButton>
@@ -410,15 +451,6 @@ export default function DesignSystemPage() {
                             </SidebarGroupContent>
                           </SidebarGroup>
                         </SidebarContent>
-                        <SidebarFooter className="border-t p-4">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-muted" />
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium truncate">Dr. Sarah Johnson</p>
-                              <p className="text-xs text-muted-foreground">Clinician</p>
-                            </div>
-                          </div>
-                        </SidebarFooter>
                       </Sidebar>
                       <SidebarInset className="flex-1">
                         <div className="h-full p-6 bg-muted/50">
@@ -820,6 +852,17 @@ export default function DesignSystemPage() {
                   </PaginationContent>
                 </Pagination>
               </div>
+
+
+              {/* Progress */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Progress</h3>
+                <div className="w-full max-w-md">
+                  <Progress value={33} />
+                  <div className="mt-2 text-sm text-muted-foreground">33% Complete</div>
+                </div>
+              </div>
+
             </div>
           </TabsContent>
 
@@ -945,6 +988,27 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </TabsContent>
+
+          {/* Sheet Demo */}
+          <TabsContent value="sheet" className="mt-6">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Sheet (Drawer) Demo</h3>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button>Open Sheet</Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Sheet Title</SheetTitle>
+                    <SheetDescription>
+                      This is a demo of the Sheet (drawer) component from shadcn/ui. You can put any content here.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="py-4">Your custom content goes here.</div>
+                </SheetContent>
+              </Sheet>
             </div>
           </TabsContent>
         </Tabs>
