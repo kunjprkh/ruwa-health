@@ -84,16 +84,11 @@ export default function DesignSystemPage() {
     }
   ]);
 
-
   const handleBiomarkerUpdate = async (id: string, newValue: number): Promise<void> => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 500));
-    
-    setBiomarkers(prev => prev.map(b => 
-      b.id === id ? { ...b, value: newValue } : b
-    ));
+    setBiomarkers(prev => prev.map(b => b.id === id ? { ...b, value: newValue } : b));
   };
-
 
   return (
     <SidebarProvider>
