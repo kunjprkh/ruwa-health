@@ -89,7 +89,6 @@ export default function DesignSystemPage() {
     await new Promise(resolve => setTimeout(resolve, 500));
     setBiomarkers(prev => prev.map(b => b.id === id ? { ...b, value: newValue } : b));
   };
-
   return (
     <SidebarProvider>
       <div className="flex min-h-screen bg-black text-foreground">
@@ -135,6 +134,122 @@ export default function DesignSystemPage() {
               <p className="text-muted-foreground mt-2">
                 shadcn/ui components with official documentation examples
               </p>
+
+    <div className="min-h-screen bg-black text-foreground">
+      <div className="container mx-auto px-6 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold tracking-tight">Design System</h1>
+          <p className="text-muted-foreground mt-2">
+            shadcn/ui components with official documentation examples
+          </p>
+        </div>
+
+        <Tabs defaultValue="buttons" className="w-full">
+          <TabsList className="grid w-full grid-cols-7">
+            <TabsTrigger value="buttons">Buttons</TabsTrigger>
+            <TabsTrigger value="inputs">Inputs</TabsTrigger>
+            <TabsTrigger value="controls">Controls</TabsTrigger>
+            <TabsTrigger value="navigation">Navigation</TabsTrigger>
+            <TabsTrigger value="basic">Basic</TabsTrigger>
+            <TabsTrigger value="biomarker">Biomarker</TabsTrigger>
+            <TabsTrigger value="sheet">Sheet</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="buttons" className="mt-6">
+            <div className="space-y-8">
+              {/* Button Variants */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Button Variants</h3>
+                <div className="flex flex-wrap gap-4">
+                  <Button>Button</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <Button variant="destructive">Destructive</Button>
+                  <Button variant="outline">Outline</Button>
+                  <Button variant="ghost">Ghost</Button>
+                  <Button variant="link">Link</Button>
+                </div>
+              </div>
+
+              {/* Button Sizes */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Button Sizes</h3>
+                <div className="flex items-center gap-4">
+                  <Button size="sm">Small</Button>
+                  <Button>Default</Button>
+                  <Button size="lg">Large</Button>
+                  <Button variant="outline" size="icon">
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Button with Icons */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">With Icons</h3>
+                <div className="flex gap-4">
+                  <Button>
+                    <Mail className="mr-2 h-4 w-4" />
+                    Login with Email
+                  </Button>
+                  <Button variant="outline">
+                    <Search className="mr-2 h-4 w-4" />
+                    Search
+                  </Button>
+                </div>
+              </div>
+
+              {/* Loading and Disabled States */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Loading and Disabled States</h3>
+                <div className="flex gap-4">
+                  <Button disabled>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Please wait
+                  </Button>
+                  <Button disabled>Disabled</Button>
+                  <Button variant="outline" disabled>Disabled Outline</Button>
+                </div>
+              </div>
+
+              <section className="space-y-4 px-4 py-4">
+                {/* Existing Button examples */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" size="sm">Small Secondary</Button>
+                  <Button variant="secondary" size="lg">Large Secondary</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="destructive" size="sm">Small Destructive</Button>
+                  <Button variant="destructive" size="lg">Large Destructive</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="outline" size="sm">Small Outline</Button>
+                  <Button variant="outline" size="lg">Large Outline</Button>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="ghost" size="sm">Small Ghost</Button>
+                  <Button variant="ghost" size="lg">Large Ghost</Button>
+                </div>
+                {/* Link Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="link" size="sm">Small Link</Button>
+                  <Button variant="link" size="lg">Large Link</Button>
+                </div>
+                {/* Loading Button (default size) */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" isLoading>Loading</Button>
+                </div>
+                {/* Disabled Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="secondary" size="sm" disabled>Small Disabled</Button>
+                  <Button variant="secondary" size="lg" disabled>Large Disabled</Button>
+                </div>
+                {/* Disabled Outline Buttons */}
+                <div className="flex gap-4">
+                  <Button variant="outline" size="sm" disabled>Small Disabled Outline</Button>
+                  <Button variant="outline" size="lg" disabled>Large Disabled Outline</Button>
+                </div>
+              </section>
+
             </div>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               {/* REMOVE TabsList and TabsTrigger */}
@@ -404,6 +519,7 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
                 </div>
+
               </TabsContent>
 
               <TabsContent value="navigation" className="mt-6">
@@ -443,6 +559,164 @@ export default function DesignSystemPage() {
                                 <SidebarMenuItem>
                                   <SidebarMenuButton className="justify-start text-lg font-normal text-muted-foreground hover:text-foreground">Legal</SidebarMenuButton>
                                 </SidebarMenuItem>
+
+              </div>
+
+              {/* Select */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Select</h3>
+                <div className="w-[180px]">
+                  <Select value={selectValue} onValueChange={setSelectValue}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a fruit" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="apple">Apple</SelectItem>
+                      <SelectItem value="banana">Banana</SelectItem>
+                      <SelectItem value="blueberry">Blueberry</SelectItem>
+                      <SelectItem value="grapes">Grapes</SelectItem>
+                      <SelectItem value="pineapple">Pineapple</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              {/* Select Disabled */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Select Disabled</h3>
+                <div className="w-[180px]">
+                  <Select disabled>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a fruit" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="apple">Apple</SelectItem>
+                      <SelectItem value="banana">Banana</SelectItem>
+                      <SelectItem value="blueberry">Blueberry</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="navigation" className="mt-6">
+            <div className="space-y-8">
+              {/* Healthcare Dashboard Sidebar */}
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Healthcare Dashboard Sidebar</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Main clinician dashboard navigation with patient-focused menu items.
+                  </p>
+                </div>
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="h-[500px] flex">
+                    <SidebarProvider>
+                      <Sidebar className="border-r">
+                        <SidebarHeader className="px-6 py-3">
+                          <div className="flex items-center justify-between w-full">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-white border" />
+                            </div>
+                            <div className="w-8 h-8 rounded-full bg-muted" />
+                          </div>
+                        </SidebarHeader>
+                        <SidebarContent>
+                          <SidebarGroup>
+                            <SidebarGroupContent>
+                              <SidebarMenu>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <span>Patients</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <span>Tests</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <span>Labs</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <span>Insights</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <a href="#" className="flex items-center gap-3">
+                                      <span>Logs</span>
+                                    </a>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              </SidebarMenu>
+                            </SidebarGroupContent>
+                          </SidebarGroup>
+                        </SidebarContent>
+                      </Sidebar>
+                      <SidebarInset className="flex-1">
+                        <div className="h-full p-6 bg-muted/50">
+                          <div className="mb-4 flex items-center gap-2">
+                            <SidebarTrigger className="-ml-1" />
+                            <h2 className="text-lg font-semibold">Dashboard Content</h2>
+                          </div>
+                          <p className="text-muted-foreground">
+                            Main content area with sidebar toggle button.
+                          </p>
+                        </div>
+                      </SidebarInset>
+                    </SidebarProvider>
+                  </div>
+                </div>
+              </div>
+
+              {/* Collapsible Sidebar */}
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Collapsible Sidebar</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Sidebar that can expand and collapse with animation.
+                  </p>
+                </div>
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="h-[400px] flex">
+                    <SidebarProvider defaultOpen={false}>
+                      <Sidebar collapsible="icon">
+                        <SidebarHeader className="border-b">
+                          <SidebarMenu>
+                            <SidebarMenuItem>
+                              <SidebarMenuButton size="lg" asChild>
+                                <a href="#">
+                                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                                    R
+                                  </div>
+                                  <div className="flex flex-col gap-0.5 leading-none">
+                                    <span className="font-semibold">Ruwa</span>
+                                    <span className="text-xs">Health Platform</span>
+                                  </div>
+                                </a>
+                              </SidebarMenuButton>
+                            </SidebarMenuItem>
+                          </SidebarMenu>
+                        </SidebarHeader>
+                        <SidebarContent>
+                          <SidebarGroup>
+                            <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+                            <SidebarGroupContent>
+                              <SidebarMenu>
+
                                 <SidebarMenuItem>
                                   <SidebarMenuButton className="justify-start text-lg font-normal text-muted-foreground hover:text-foreground">Logs</SidebarMenuButton>
                                 </SidebarMenuItem>
@@ -907,6 +1181,7 @@ export default function DesignSystemPage() {
                             <strong>High Confidence (≥90%):</strong> gray-80
                           </div>
                         </div>
+
                         <div className="flex items-start gap-2">
                           <div className="h-6 rounded-sm flex-shrink-0" style={{width: '6px', backgroundColor: '#555556'}}></div>
                           <div>
@@ -940,6 +1215,174 @@ export default function DesignSystemPage() {
                           readOnly 
                           className="border border-border text-right"
                         />
+
+                        <Switch />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+
+              {/* Badge */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Badge</h3>
+                <div className="flex flex-wrap gap-4">
+                  <Badge>Badge</Badge>
+                  <Badge variant="secondary">Secondary</Badge>
+                  <Badge variant="destructive">Destructive</Badge>
+                  <Badge variant="outline">Outline</Badge>
+                </div>
+                {/* New color variants - two-row layout */}
+                <div className="flex flex-wrap gap-6 mb-6">
+                  <Badge variant="green">Green</Badge>
+                  <Badge variant="red">Red</Badge>
+                  <Badge variant="orange">Orange</Badge>
+                  <Badge variant="blue">Blue</Badge>
+                  <Badge variant="amber">Amber</Badge>
+                  <Badge variant="magenta">Magenta</Badge>
+                  <Badge variant="yellow">Yellow</Badge>
+                </div>
+                <div className="flex flex-wrap gap-6">
+                  <Badge variant="green-secondary">Green Secondary</Badge>
+                  <Badge variant="red-secondary">Red Secondary</Badge>
+                  <Badge variant="orange-secondary">Orange Secondary</Badge>
+                  <Badge variant="blue-secondary">Blue Secondary</Badge>
+                  <Badge variant="amber-secondary">Amber Secondary</Badge>
+                  <Badge variant="magenta-secondary">Magenta Secondary</Badge>
+                  <Badge variant="yellow-secondary">Yellow Secondary</Badge>
+                </div>
+                {/* Biomarker Status Badges */}
+                <div className="flex flex-wrap gap-6 mt-4">
+                  <Badge variant="peak">Peak</Badge>
+                  <Badge variant="critical">Critical</Badge>
+                  <Badge variant="out_of_range">Out Of Range</Badge>
+                  <Badge variant="normal">Normal</Badge>
+                </div>
+              </div>
+
+              {/* Alert */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Alert</h3>
+                <div className="space-y-4 max-w-md">
+                  <Alert>
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription>
+                      Your session will expire in 5 minutes.
+                    </AlertDescription>
+                  </Alert>
+                  <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription>
+                      Your session has expired. Please log in again.
+                    </AlertDescription>
+                  </Alert>
+                </div>
+              </div>
+
+              {/* Pagination */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Pagination</h3>
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious href="#" />
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#" isActive>
+                        1
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">2</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">3</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">8</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationNext href="#" />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              </div>
+
+              {/* Progress */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Progress</h3>
+                <div className="w-full max-w-md">
+                  <Progress value={33} />
+                  <div className="mt-2 text-sm text-muted-foreground">33% Complete</div>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="biomarker" className="mt-6">
+            <div className="space-y-8">
+              {/* Biomarker Table Header */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Biomarker Table Row</h3>
+                <p className="text-sm text-muted-foreground mb-6">
+                  Interactive biomarker data rows with inline editing, confidence indicators, and status badges.
+                  Click on any value to edit, use Enter to save or Escape to cancel.
+                </p>
+              </div>
+
+              {/* Biomarker Table */}
+              <BiomarkerTable 
+                data={biomarkers}
+                onValueUpdate={handleBiomarkerUpdate}
+              />
+
+              {/* Feature Documentation */}
+              <div className="grid gap-6 md:grid-cols-2">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Interaction Features</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3 text-sm">
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <strong>Inline Editing:</strong> Click any value to edit in place
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <strong>Keyboard Shortcuts:</strong> Enter to save, Escape to cancel
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <strong>Number Formatting:</strong> Automatic comma separators (1,000)
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <strong>Validation:</strong> Real-time numeric input validation
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Visual Indicators</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3 text-sm">
+                    <div className="flex items-start gap-2">
+                      <div className="h-6 rounded-sm flex-shrink-0" style={{width: '6px', backgroundColor: '#c9c9cd'}}></div>
+                      <div>
+                        <strong>High Confidence (≥90%):</strong> gray-80
+
                       </div>
                       <div className="space-y-2">
                         <Label>Hover State</Label>
@@ -968,6 +1411,7 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
                 </div>
+
               </TabsContent>
 
               {/* Sheet Demo */}
@@ -993,6 +1437,33 @@ export default function DesignSystemPage() {
             </Tabs>
           </div>
         </SidebarInset>
+
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* Sheet Demo */}
+          <TabsContent value="sheet" className="mt-6">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Sheet (Drawer) Demo</h3>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button>Open Sheet</Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Sheet Title</SheetTitle>
+                    <SheetDescription>
+                      This is a demo of the Sheet (drawer) component from shadcn/ui. You can put any content here.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="py-4">Your custom content goes here.</div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </TabsContent>
+        </Tabs>
+
       </div>
     </SidebarProvider>
   );
